@@ -1,4 +1,4 @@
-import { User } from '../models/index.js';
+import { User, Book } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js'; 
 
 // Define types for the arguments
@@ -19,7 +19,11 @@ interface UserArgs {
   username: string;
 }
 
-
+interface AddBookArgs {
+  title: string;
+  author: string;
+  genre: string;
+}
 
 
 const resolvers = {
@@ -41,6 +45,9 @@ const resolvers = {
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
     },
+    books: async () => {
+      return Book.find() // Query to retrieve all books
+    }
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
@@ -76,6 +83,11 @@ const resolvers = {
     
       // Return the token and the user
       return { token, user };
+    },
+    addBook: async (_parent: any, { title, author, genre }: AddBookArgs) => {
+      // Create a new book entry in the database
+      const newBook = await Book.create({ title, author, genre });
+      return newBook;
     },
   },
 };
