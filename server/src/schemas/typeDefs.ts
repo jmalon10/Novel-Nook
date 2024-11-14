@@ -24,7 +24,7 @@ type Query {
   users: [User!]!
   user(username: String!): User
   me: User
-  books: [Book!]!
+  getBooks(title: String, author: String, genre: String): [Book!]!
 }
 
 # Input type for the addUser mutation, containing necessary fields.
