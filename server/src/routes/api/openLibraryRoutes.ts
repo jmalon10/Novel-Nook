@@ -1,6 +1,6 @@
 // /server/src/routes/api/openLibraryRoutes.ts
 import express from 'express';
-import { fetchBooksByTitle, fetchBookByISBN } from '../../utils/openLibraryService';
+import { fetchBooksByTitle, fetchBookByISBN } from '../../utils/openLibraryService.js';
 
 const router = express.Router();
 

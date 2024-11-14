@@ -1,7 +1,7 @@
 import express from 'express';
 import db from './config/connection.js';
 import dotenv from 'dotenv';
-import openLibraryRoutes from './routes/api/openLibraryRoutes';
+import openLibraryRoutes from './routes/api/openLibraryRoutes.js';
 
 // Import the ApolloServer class
 import { ApolloServer } from '@apollo/server';
@@ -15,6 +15,7 @@ dotenv.config();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  csrfPrevention: false,
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
