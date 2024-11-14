@@ -23,6 +23,7 @@ const startApolloServer = async () => {
   await server.start();
   console.log('APOLLO SERVER RUNNING!');
   await db();
+  console.log('Connected to MongoDB!');
 
   const PORT = process.env.PORT || 3001;
   const app = express();
