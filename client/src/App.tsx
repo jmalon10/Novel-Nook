@@ -1,10 +1,10 @@
-// src/App.js
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
-import Logout from './components/Logout';
+import Home from './components/Homepage.tsx';
+import Logout from './components/Logout.tsx';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <div>
@@ -21,3 +21,4 @@ function App() {
 }
 
 export default App;
+

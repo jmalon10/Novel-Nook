@@ -1,7 +1,7 @@
-// src/components/Home.js
+// src/components/Home.tsx
 import React from 'react';
 
-function Home() {
+const Home: React.FC = () => {
   return (
     <div>
       <h1>Welcome to Novel Hook</h1>
@@ -11,3 +11,4 @@ function Home() {
 }
 
 export default Home;
+

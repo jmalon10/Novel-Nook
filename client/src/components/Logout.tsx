@@ -1,12 +1,12 @@
-// src/components/Logout.js
+// src/components/Logout.tsx
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
-function Logout() {
+const Logout: React.FC = () => {
   const history = useHistory();
 
   const handleLogout = () => {
-    // Simulate logout action (e.g., clearing session or authentication)
+    // Simulate logout action (clear user session, etc.)
     alert("You've been logged out!");
 
     // Redirect to the home page or login screen
@@ -21,3 +21,4 @@ function Logout() {
 }
 
 export default Logout;
+
