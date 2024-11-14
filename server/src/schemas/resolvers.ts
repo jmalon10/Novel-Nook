@@ -25,6 +25,11 @@ interface AddBookArgs {
   genre: string;
 }
 
+interface GetBooksArgs {
+  title?: string;
+  author?: string;
+  genre?: string;
+}
 
 const resolvers = {
   Query: {
@@ -45,9 +50,18 @@ const resolvers = {
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
     },
-    books: async () => {
-      return Book.find() // Query to retrieve all books
-    }
+    // books: async () => {
+    //   return Book.find() // Query to retrieve all books
+    // }
+    getBooks: async (_parent: any, { title, author, genre }: GetBooksArgs) => {
+      // Build a filter object based on the provided arguments
+      const filter: any = {};
+      if (title) filter.title = { $regex: title, $options: 'i' }; // Case-insensitive search
+      if (author) filter.author = { $regex: author, $options: 'i' };
+      if (genre) filter.genre = { $regex: genre, $options: 'i' };
+
+      return Book.find(filter);
+    },
   },
   Mutation: {
     addUser: async (_parent: any, { input }: AddUserArgs) => {
