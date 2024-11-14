@@ -14,3 +14,16 @@ router.get('/books', async (req, res) => {
       res.status(500).json({ message: "Error fetching books by title" });
     }
   });
+
+   // Endpoint to fetch a book by ISBN
+router.get('/book/:isbn', async (req, res) => {
+    const { isbn } = req.params;
+    try {
+      const data = await fetchBookByISBN(isbn);
+      res.json(data);
+    } catch (error) {
+      res.status(500).json({ message: "Error fetching book by ISBN" });
+    }
+  });
+  
+  export default router;
