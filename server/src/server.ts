@@ -17,6 +17,7 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
 
   await server.start();
+  console.log('APOLLO SERVER RUNNING!');
   await db();
 
   const PORT = process.env.PORT || 3001;

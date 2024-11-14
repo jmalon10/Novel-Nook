@@ -12,6 +12,7 @@ const server = new ApolloServer({
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
     await server.start();
+    console.log('APOLLO SERVER RUNNING!');
     await db();
     const PORT = process.env.PORT || 3001;
     const app = express();
