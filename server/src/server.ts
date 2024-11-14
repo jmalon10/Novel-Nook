@@ -10,6 +10,8 @@ import { expressMiddleware } from '@apollo/server/express4';
 // Import the two parts of a GraphQL schema
 import { typeDefs, resolvers } from './schemas/index.js';
 
+dotenv.config(); 
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
@@ -29,6 +31,9 @@ const startApolloServer = async () => {
   app.use(express.json());
 
   app.use('/graphql', expressMiddleware(server));
+
+  // Set up other API routes
+  app.use('/api/openlibrary', openLibraryRoutes);
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
