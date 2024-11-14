@@ -62,7 +62,8 @@ Check out some of the features in action below:
 ## Contact
 
 For questions or feedback, please reach out to our Developer Team
-📕 [Jackie's GitHub] (http://github.com/jmalon10)
-📙 [Judymae's GitHub] (http://github.com/judymaej)
-📗 [Kol's GitHub] (http://github.com/kol3wang)
-📘 [Sahira's GitHub] (https://github.com/Sahiramarte17)
+
+- 📕 [Jackie's GitHub] (http://github.com/jmalon10)
+- 📙 [Judymae's GitHub] (http://github.com/judymaej)
+- 📗 [Kol's GitHub] (http://github.com/kol3wang)
+- 📘 [Sahira's GitHub] (https://github.com/Sahiramarte17)
