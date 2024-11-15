@@ -30,11 +30,22 @@
 // /server/src/routes/api/openLibraryRoutes.ts
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import fetch from 'node-fetch';
 import { OpenLibraryApiResponse, OpenLibraryBookDetails } from '../../types/express/openLibrary.interface';
 
 dotenv.config();
 
 const router = express.Router();
+
+/**
+ * Generate the cover image URL for a book.
+ * @param isbn - The ISBN of the book.
+ * @param size - The size of the cover (S, M, or L).
+ * @returns The URL of the cover image.
+ */
+const generateCoverImageUrl = (isbn: string, size: 'S' | 'M' | 'L' = 'M') => {
+  return `https://covers.openlibrary.org/b/isbn/${isbn}-${size}.jpg`;
+};
 
 // GET /api/openlibrary/books - Fetch books by title with an optional limit parameter
 router.get('/books', async (req: Request, res: Response) => {
