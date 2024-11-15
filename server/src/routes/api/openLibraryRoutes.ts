@@ -70,7 +70,7 @@ router.get('/books', async (req: Request, res: Response) => {
         author_name: book.author_name,
         cover_id: book.cover_i,
         cover_url: isbn ? generateCoverImageUrl(isbn) : null,
-        genres: book.subject || []
+        genres: book.subject ? book.subject.slice(0, 5) : []
       };
     });
 
@@ -102,7 +102,7 @@ router.get('/book/:isbn', async (req: Request, res: Response) => {
       publish_date: bookDetails.publish_date,
       number_of_pages: bookDetails.number_of_pages,
       cover_url: generateCoverImageUrl(isbn),
-      genres: bookDetails.subjects || []
+      genres: bookDetails.subjects ? bookDetails.subjects.slice(0, 5) : []
     });
   } catch (error: any) {
     console.error("Error fetching book by ISBN:", error);
