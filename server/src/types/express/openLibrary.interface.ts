@@ -1,5 +1,4 @@
 // /server/src/types/express/openLibrary.interface.ts
-
 export interface OpenLibraryBook {
     key: string;
     title: string;
