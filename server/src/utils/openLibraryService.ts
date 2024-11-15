@@ -28,7 +28,8 @@ export const fetchBooksByTitle = async (title: string) => {
         title: book.title,
         author_name: book.author_name,
         cover_id: book.cover_i,
-        cover_url: isbn ? generateCoverImageUrl(isbn) : null, // Add cover URL if ISBN exists
+        cover_url: isbn ? generateCoverImageUrl(isbn) : null, 
+        genres: book.subject || []
       };
     });
 
@@ -54,7 +55,8 @@ export const fetchBookByISBN = async (isbn: string) => {
       authors: bookDetails.authors ? bookDetails.authors.map((author: any) => author.name) : [],
       publish_date: bookDetails.publish_date,
       number_of_pages: bookDetails.number_of_pages,
-      cover_url: generateCoverImageUrl(isbn), // Add cover URL using the ISBN
+      cover_url: generateCoverImageUrl(isbn),
+      genres: bookDetails.subjects || [] 
     };
   } catch (error) {
     console.error("Error fetching book by ISBN:", error);
