@@ -4,6 +4,7 @@ export interface OpenLibraryBook {
     title: string;
     author_name?: string[];
     cover_i?: number;
+    isbn?: string[];
   }
   
   export interface OpenLibraryApiResponse {
