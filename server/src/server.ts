@@ -1,7 +1,7 @@
 import express from 'express';
 import db from './config/connection.js';
 import dotenv from 'dotenv';
-import openLibraryRoutes from './routes/api/openLibraryRoutes.js';
+import { openLibraryRoutes } from './routes/api/openLibraryRoutes.js';
 
 // Import the ApolloServer class
 import { ApolloServer } from '@apollo/server';
