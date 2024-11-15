@@ -13,18 +13,31 @@ const generateCoverImageUrl = (isbn: string, size: 'S' | 'M' | 'L' = 'M') => {
 };
 
 /**
- * Fetch books from Open Library by title.
+ * Fetch books from Open Library by title and include cover URLs.
  * @param title - The title of the book.
  */
 export const fetchBooksByTitle = async (title: string) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/search.json?title=${title}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching books by title:", error);
-      throw new Error("Failed to fetch books by title.");
-    }
-  };
+  try {
+    const response = await axios.get(`${BASE_URL}/search.json?title=${title}`);
+    const data = response.data;
+
+    // Map over the results to add a cover URL for each book if an ISBN is available
+    const booksWithCoverUrls = data.docs.map((book: any) => {
+      const isbn = book.isbn ? book.isbn[0] : null; // Use the first ISBN if available
+      return {
+        title: book.title,
+        author_name: book.author_name,
+        cover_id: book.cover_i,
+        cover_url: isbn ? generateCoverImageUrl(isbn) : null, // Add cover URL if ISBN exists
+      };
+    });
+
+    return booksWithCoverUrls;
+  } catch (error) {
+    console.error("Error fetching books by title:", error);
+    throw new Error("Failed to fetch books by title.");
+  }
+};
   
   /**
  * Fetch book details from Open Library by ISBN.
