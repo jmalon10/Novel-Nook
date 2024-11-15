@@ -100,6 +100,7 @@ router.get('/book/:isbn', async (req: Request, res: Response) => {
       authors: bookDetails.authors.map(author => author.name),
       publish_date: bookDetails.publish_date,
       number_of_pages: bookDetails.number_of_pages,
+      cover_url: generateCoverImageUrl(isbn)
     });
   } catch (error: any) {
     console.error("Error fetching book by ISBN:", error);
