@@ -1,8 +1,8 @@
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-//import './index.css';
+import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-import App from './App.tsx';
+import App from './App.jsx'
 import SearchBooks from './pages/SearchBooks'
 
 
@@ -15,13 +15,13 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SearchBooks />
-      },
-    
-    ],
-  },
-]);
+      
+       
+      }
+    ]
+  }
+])
 
-const rootElement = document.getElementById('root');
-if (rootElement) {
-  ReactDOM.createRoot(rootElement).render(<RouterProvider router={router} />);
-}
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <RouterProvider router={router} />
+)
