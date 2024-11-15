@@ -36,23 +36,31 @@ dotenv.config();
 
 const router = express.Router();
 
-// GET /api/openlibrary/books - Fetch books by title
+// GET /api/openlibrary/books - Fetch books by title with an optional limit parameter
 router.get('/books', async (req: Request, res: Response) => {
   try {
-    const { title } = req.query;
+    const { title, limit } = req.query;
 
     if (!title) {
       return res.status(400).json({ message: "Title query parameter is required" });
     }
 
     const response = await fetch(
-      `https://openlibrary.org/search.json?title=${title}`
+      `https://openlibrary.org/search.json?title=${title}&limit=${limit || 10}`
     );
     const data: OpenLibraryApiResponse = await response.json();
 
-    return res.json(data.docs); // Return an array of books that match the title
+    // Map through the results and return only the essential fields
+    const simplifiedData = data.docs.map(book => ({
+      title: book.title,
+      author_name: book.author_name,
+      cover_id: book.cover_i,
+    }));
+
+    return res.json(simplifiedData);
   } catch (error: any) {
-    return res.status(500).json({ message: error.message });
+    console.error("Error fetching books by title:", error);
+    return res.status(500).json({ message: "Failed to fetch books by title." });
   }
 });
 
@@ -64,11 +72,22 @@ router.get('/book/:isbn', async (req: Request, res: Response) => {
     const response = await fetch(
       `https://openlibrary.org/isbn/${isbn}.json`
     );
+    
+    if (!response.ok) {
+      return res.status(404).json({ message: "Book not found with the provided ISBN" });
+    }
+
     const bookDetails: OpenLibraryBookDetails = await response.json();
 
-    return res.json(bookDetails); // Return details of the book with the provided ISBN
+    return res.json({
+      title: bookDetails.title,
+      authors: bookDetails.authors.map(author => author.name),
+      publish_date: bookDetails.publish_date,
+      number_of_pages: bookDetails.number_of_pages,
+    });
   } catch (error: any) {
-    return res.status(500).json({ message: error.message });
+    console.error("Error fetching book by ISBN:", error);
+    return res.status(500).json({ message: "Failed to fetch book details by ISBN." });
   }
 });
 
