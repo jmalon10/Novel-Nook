@@ -61,12 +61,17 @@ router.get('/books', async (req: Request, res: Response) => {
     );
     const data: OpenLibraryApiResponse = await response.json();
 
-    // Map through the results and return only the essential fields
-    const simplifiedData = data.docs.map(book => ({
-      title: book.title,
-      author_name: book.author_name,
-      cover_id: book.cover_i,
-    }));
+  
+ // Map through the results and return only the essential fields, including cover URL
+    const simplifiedData = data.docs.map(book => {
+      const isbn = book.isbn ? book.isbn[0] : null; // Use the first ISBN if available
+      return {
+        title: book.title,
+        author_name: book.author_name,
+        cover_id: book.cover_i,
+        cover_url: isbn ? generateCoverImageUrl(isbn) : null // Add cover URL if ISBN exists
+      };
+    });
 
     return res.json(simplifiedData);
   } catch (error: any) {
