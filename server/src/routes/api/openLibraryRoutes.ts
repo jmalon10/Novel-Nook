@@ -69,7 +69,8 @@ router.get('/books', async (req: Request, res: Response) => {
         title: book.title,
         author_name: book.author_name,
         cover_id: book.cover_i,
-        cover_url: isbn ? generateCoverImageUrl(isbn) : null // Add cover URL if ISBN exists
+        cover_url: isbn ? generateCoverImageUrl(isbn) : null,
+        genres: book.subject || []
       };
     });
 
@@ -100,7 +101,8 @@ router.get('/book/:isbn', async (req: Request, res: Response) => {
       authors: bookDetails.authors.map(author => author.name),
       publish_date: bookDetails.publish_date,
       number_of_pages: bookDetails.number_of_pages,
-      cover_url: generateCoverImageUrl(isbn)
+      cover_url: generateCoverImageUrl(isbn),
+      genres: bookDetails.subjects || []
     });
   } catch (error: any) {
     console.error("Error fetching book by ISBN:", error);
