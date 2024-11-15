@@ -14,7 +14,7 @@ const generateCoverImageUrl = (isbn: string, size: 'S' | 'M' | 'L' = 'M') => {
 
 /**
  * Fetch books from Open Library by title and include cover URLs.
- * @param title - The title of the book.
+ * @param title 
  */
 export const fetchBooksByTitle = async (title: string) => {
   try {
