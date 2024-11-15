@@ -39,16 +39,25 @@ export const fetchBooksByTitle = async (title: string) => {
   }
 };
   
-  /**
- * Fetch book details from Open Library by ISBN.
+/**
+ * Fetch book details from Open Library by ISBN and include cover URL.
  * @param isbn - The ISBN of the book.
  */
 export const fetchBookByISBN = async (isbn: string) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/isbn/${isbn}.json`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching book by ISBN:", error);
-      throw new Error("Failed to fetch book by ISBN.");
-    }
-  };
+  try {
+    const response = await axios.get(`${BASE_URL}/isbn/${isbn}.json`);
+    const bookDetails = response.data;
+
+  
+    return {
+      title: bookDetails.title,
+      authors: bookDetails.authors ? bookDetails.authors.map((author: any) => author.name) : [],
+      publish_date: bookDetails.publish_date,
+      number_of_pages: bookDetails.number_of_pages,
+      cover_url: generateCoverImageUrl(isbn), // Add cover URL using the ISBN
+    };
+  } catch (error) {
+    console.error("Error fetching book by ISBN:", error);
+    throw new Error("Failed to fetch book by ISBN.");
+  }
+};
