@@ -22,7 +22,7 @@ interface UserArgs {
 interface AddBookArgs {
   title: string;
   author: string;
-  genre: string;
+  genre: string[];
 }
 
 interface GetBooksArgs {
