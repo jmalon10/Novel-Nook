@@ -3,6 +3,16 @@ import axios from 'axios';
 const BASE_URL = 'https://openlibrary.org';
 
 /**
+ * Generate the cover image URL for a book.
+ * @param isbn - The ISBN of the book.
+ * @param size - The size of the cover (S, M, or L).
+ * @returns The URL of the cover image.
+ */
+const generateCoverImageUrl = (isbn: string, size: 'S' | 'M' | 'L' = 'M') => {
+  return `https://covers.openlibrary.org/b/isbn/${isbn}-${size}.jpg`;
+};
+
+/**
  * Fetch books from Open Library by title.
  * @param title - The title of the book.
  */
