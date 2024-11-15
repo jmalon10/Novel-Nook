@@ -18,17 +18,32 @@ const Navbar = () => {
   };
 
   return (
-    <header className="display-flex justify-space-between align-center p-2 mint-green">
-      <h1>Welcome Novel-Nook!</h1>
-      <div className="button-group">
-        {/* Login button */}
-        <button className="login-btn" onClick={() => alert('Login clicked')}>
-          Login
+    <header className="navbar-container">
+      <h1>Welcome to Novel-Nook!</h1>
+      
+      {/* Navigation Box with Explore, Home, Log In, and Profile buttons */}
+      <div className="nav-box">
+        <button className="nav-btn">Home</button>
+        <button className="nav-btn">Explore</button>
+        <button className="nav-btn" onClick={() => alert('Log In clicked')}>
+          Log In
         </button>
-        
-        {/* Books button */}
+        <button className="nav-btn">Profile</button>
+      </div>
+
+      {/* Search Bar directly placed in the navbar */}
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Search for books..."
+        />
+      </div>
+
+      {/* Books Button */}
+      <div className="button-group">
         <button className="books-btn" onClick={toggleBooks}>
-          Search
+          Search Books
         </button>
       </div>
 
@@ -48,5 +63,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
 
 
