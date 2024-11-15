@@ -1,28 +1,25 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
+//import './index.css';
 
 import App from './App.tsx';
-import ErrorPage from './pages/ErrorPage.tsx';
+import SearchBooks from './pages/SearchBooks'
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorPage />,
+    errorElement: <h1 className='display-2'>Wrong page!</h1>,
     children: [
       {
         index: true,
-        element: <Home />
-      }, 
-      {
-        path: '/feedback',
-        element: <Feedback />
-      }, 
-    ]
-  }
-])
+        element: <SearchBooks />
+      },
+    
+    ],
+  },
+]);
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
