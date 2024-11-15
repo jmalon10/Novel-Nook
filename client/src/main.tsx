@@ -3,19 +3,24 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 //import './index.css';
 
 import App from './App.tsx';
-import SearchBooks from './src/pages/SearchBooks.tsx';
+import SearchBooks from './pages/SearchBooks.tsx';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    Element: <SearchBooks />,
+    errorElement: <h1 className='display-2'>Wrong page!</h1>,
     children: [
-    
-    ],
-  },
-]);
+      {
+        index: true,
+        element: <SearchBooks />
+      }, {
+       
+      }
+    ]
+  }
+])
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
