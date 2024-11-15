@@ -1,4 +1,4 @@
-import { User } from '../models/index.js';
+import { User, Book } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js'; 
 
 // Define types for the arguments
@@ -19,8 +19,17 @@ interface UserArgs {
   username: string;
 }
 
+interface AddBookArgs {
+  title: string;
+  author: string;
+  genre: string;
+}
 
-
+interface GetBooksArgs {
+  title?: string;
+  author?: string;
+  genre?: string;
+}
 
 const resolvers = {
   Query: {
@@ -40,6 +49,18 @@ const resolvers = {
       }
       // If the user is not authenticated, throw an AuthenticationError
       throw new AuthenticationError('Could not authenticate user.');
+    },
+    // books: async () => {
+    //   return Book.find() // Query to retrieve all books
+    // }
+    getBooks: async (_parent: any, { title, author, genre }: GetBooksArgs) => {
+      // Build a filter object based on the provided arguments
+      const filter: any = {};
+      if (title) filter.title = { $regex: title, $options: 'i' }; // Case-insensitive search
+      if (author) filter.author = { $regex: author, $options: 'i' };
+      if (genre) filter.genre = { $regex: genre, $options: 'i' };
+
+      return Book.find(filter);
     },
   },
   Mutation: {
@@ -76,6 +97,11 @@ const resolvers = {
     
       // Return the token and the user
       return { token, user };
+    },
+    addBook: async (_parent: any, { title, author, genre }: AddBookArgs) => {
+      // Create a new book entry in the database
+      const newBook = await Book.create({ title, author, genre });
+      return newBook;
     },
   },
 };
