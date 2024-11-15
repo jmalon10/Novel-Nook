@@ -5,6 +5,7 @@ export interface OpenLibraryBook {
     author_name?: string[];
     cover_i?: number;
     isbn?: string[];
+    subject?: string[]; 
   }
   
   export interface OpenLibraryApiResponse {
@@ -16,4 +17,5 @@ export interface OpenLibraryBook {
     authors: { name: string }[];
     publish_date: string;
     number_of_pages: number;
+    subjects?: string[];
   }
