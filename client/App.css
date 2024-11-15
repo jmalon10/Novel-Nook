@@ -1,0 +1,126 @@
+/* General Styles for the App */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  /* Main Navbar Container */
+  .navbar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #6bdc87;  /* Mint green or any color of your choice */
+    padding: 20px;
+    border-bottom: 2px solid #4CAF50; /* Border to separate navbar */
+  }
+  
+  /* Styling the Heading */
+  h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: white;
+  }
+  
+  /* Navigation Box */
+  .nav-box {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .nav-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Search Bar Styling */
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Styling the search bar */
+  .search-bar {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    outline: none;
+  }
+  
+  /* Search bar focus effect */
+  .search-bar:focus {
+    border-color: #4CAF50;
+  }
+  
+  /* Books list box styling */
+  .book-list-box {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .book-list-box h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .book-list-box ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .book-list-box li {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Styling the Books Button */
+  .books-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .books-btn:hover {
+    background-color: #45a049;
+  }
+  
+  /* Footer or extra content (if needed) */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 30px;
+  }
+  
