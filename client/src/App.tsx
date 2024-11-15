@@ -1,12 +1,14 @@
-// src/App.tsx
-import React from 'react';
-import './App.css';
-import HomePage from './pages/SearchBooks';  // Fix the import to match the component name
+import { Outlet } from 'react-router-dom';
 
-const App: React.FC = () => {
+//import Navbar from './components/Navbar';
+
+function App() {
   return (
-    <div className="App">
-      <HomePage />  {/* Use the HomePage component here */}
+    <div>
+      <Navbar />
+      <main className='container container-fluid mt-5'>
+        <Outlet />
+      </main>
     </div>
   );
 }
