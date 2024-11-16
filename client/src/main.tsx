@@ -4,13 +4,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App.tsx';
 import SearchBooks from './pages/SearchBooks.tsx';
+import ErrorPage from './pages/ErrorPage.tsx';
 
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <h1 className='display-2'>Wrong page!</h1>,
+    errorElement:<ErrorPage />,
     children: [
       {
         index: true,
