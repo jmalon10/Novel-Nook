@@ -5,17 +5,17 @@ const Home = () => {
 
   const checkLogin = () => {
     if (Auth.loggedIn()) {
-      setLoginCheck(true);  // Set loginCheck to true if user is logged in
+      setLoginCheck(true); // Set loginCheck to true if user is logged in
     }
-  
-    useEffect(() => {
-      checkLogin();  // Call checkLogin() function to update loginCheck state
-    }, [loginCheck]);
-
   };
+
+  useEffect(() => {
+    checkLogin(); // Call checkLogin() function to update loginCheck state
+  }, [loginCheck]);
+
     return (
         <>
-     { loginCheck ? (
+     {loginCheck ? (
         <h1>Welcome to the home page!</h1>
       ) : (
         <div>
