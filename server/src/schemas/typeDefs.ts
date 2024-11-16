@@ -10,7 +10,7 @@ type Book {
   _id: ID!
   title: String!
   author: String!
-  genre: String!
+  genre: [String]!
 }
 
 # Type for the authentication payload, returning a token and user.
