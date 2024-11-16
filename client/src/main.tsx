@@ -6,6 +6,7 @@ import App from './App.tsx';
 import SearchBooks from './pages/SearchBooks.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Login from './pages/Login.tsx';
+import Home from './pages/Home.tsx';
 
 
 const router = createBrowserRouter([
@@ -16,11 +17,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SearchBooks />
+        element: <Home />
       }, 
       {
         path: '/login',
         element: <Login />
+      }, 
+      {
+        path: '/SearchBooks',
+        element: <SearchBooks />
       }, 
     ]
   }
