@@ -81,7 +81,7 @@ const Login = () => {
 
             {error && (
               <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
+                {`User does not exist. Please try again or create new user.`}
               </div>
             )}
           </div>
@@ -92,4 +92,3 @@ const Login = () => {
 };
 
 export default Login;
-  
