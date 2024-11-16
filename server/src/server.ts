@@ -1,7 +1,7 @@
 import express from 'express';
 import db from './config/connection.js';
 import dotenv from 'dotenv';
-import openLibraryRoutes from './routes/api/openLibraryRoutes.js';
+import { openLibraryRoutes } from './routes/api/openLibraryRoutes.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const __dirname = fileURLToPath(import.meta.url);
