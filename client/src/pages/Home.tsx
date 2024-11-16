@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
 import Auth from '../utils/auth'; 
 const Home = () => {
-    const [loginCheck, setLoginCheck] = useState(false);
+  const [loginCheck, setLoginCheck] = useState(false);
 
+  const checkLogin = () => {
+    if (Auth.loggedIn()) {
+      setLoginCheck(true);  // Set loginCheck to true if user is logged in
+    }
+  
     useEffect(() => {
-        setLoginCheck(Auth.loggedIn());
+      checkLogin();  // Call checkLogin() function to update loginCheck state
     }, [loginCheck]);
+
+  };
     return (
         <>
      { loginCheck ? (
