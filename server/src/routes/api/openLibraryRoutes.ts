@@ -29,7 +29,7 @@
 //   export default router;
 // /server/src/routes/api/openLibraryRoutes.ts
 import express, { Request, Response } from 'express';
-import dotenv from 'dotenv';
+import dotenv, { parse } from 'dotenv';
 import fetch from 'node-fetch';
 import { OpenLibraryApiResponse, OpenLibraryBookDetails } from '../../types/express/openLibrary.interface';
 
@@ -50,14 +50,15 @@ const generateCoverImageUrl = (isbn: string, size: 'S' | 'M' | 'L' = 'M') => {
 // GET /api/openlibrary/books - Fetch books by title with an optional limit parameter
 router.get('/books', async (req: Request, res: Response) => {
   try {
-    const { title, limit } = req.query;
+    const { title } = req.query;
+    const limit = parseInt(req.query.limit as string, 10) || 10;
 
     if (!title) {
-      return res.status(400).json({ message: "Title query parameter is required" });
+      return res.status(400).json({ success: false, message: "Title query parameter is required" });
     }
 
     const response = await fetch(
-      `https://openlibrary.org/search.json?title=${title}&limit=${limit || 10}`
+      `https://openlibrary.org/search.json?title=${title}&limit=${limit}`
     );
     const data: OpenLibraryApiResponse = await response.json();
 
