@@ -76,28 +76,32 @@ const resolvers = {
     },
     
     login: async (_parent: any, { email, password }: LoginUserArgs) => {
-      // Find a user with the provided email
+      // Fetch the user by email
       const user = await User.findOne({ email });
-    
-      // If no user is found, throw an AuthenticationError
       if (!user) {
-        throw new AuthenticationError('Could not authenticate user.');
+        throw new AuthenticationError('No user found with this email.');
       }
     
-      // Check if the provided password is correct
+      // Verify the password
       const correctPw = await user.isCorrectPassword(password);
-    
-      // If the password is incorrect, throw an AuthenticationError
       if (!correctPw) {
-        throw new AuthenticationError('Could not authenticate user.');
+        throw new AuthenticationError('Incorrect password.');
       }
     
-      // Sign a token with the user's information
+      // Generate a token
       const token = signToken(user.username, user.email, user._id);
     
-      // Return the token and the user
-      return { token, user };
+      // Return token and user object
+      return { 
+        token, 
+        user: {
+          _id: user._id,
+          username: user.username,
+          email: user.email,
+        },
+      };
     },
+    
     addBook: async (_parent: any, { title, author, genre }: AddBookArgs) => {
       // Create a new book entry in the database
       const newBook = await Book.create({ title, author, genre });
