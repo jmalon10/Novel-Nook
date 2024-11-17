@@ -1,4 +1,13 @@
-import { useState, useEffect } from 'react';
+const Home = () => {
+  return (
+    <section>
+      <h1>Welcome to Novel Nook</h1>
+      <p>Your place to find and save books!</p>
+    </section>
+  );
+};
+
+export default Home;import { useState, useEffect } from 'react';
 import Auth from '../utils/auth'; 
 const Home = () => {
   const [loginCheck, setLoginCheck] = useState(false);
