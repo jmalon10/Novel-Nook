@@ -39,9 +39,15 @@ const Navbar = () => {
           </button>
             <button className="books-btn">
         <Link to="/SearchBooks" className="no-underline text-shadow-lg">
-              Search
+              SearchBooks
             </Link>
         </button>
+
+        <button className="library-btn">
+              <Link to="/library" className="no-underline text-shadow-lg">
+                MyLibrary
+              </Link>
+            </button>
           </div>
         )}
       </div>
