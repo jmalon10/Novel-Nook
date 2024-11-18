@@ -7,11 +7,14 @@ interface Book {
   cover_url?: string;
   genres?: string[];
 }
-
+interface BookCardProps {
+  book: Book;
+  onAddToLibrary: (book: Book) => void;
+}
 interface BookCardProps {
   book: Book;
 }
-const BookCard: React.FC<BookCardProps> = ({ book }) => {
+const BookCard: React.FC<BookCardProps> = ({ book, onAddToLibrary }) => {
     return (
       <div className="book-card" style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '16px', margin: '8px', maxWidth: '200px' }}>
         {book.cover_url ? (
@@ -26,6 +29,12 @@ const BookCard: React.FC<BookCardProps> = ({ book }) => {
         {book.genres && (
           <p style={{ fontSize: '0.8em', color: '#777' }}>Genres: {book.genres.join(', ')}</p>
         )}
+        <button
+        onClick={() => onAddToLibrary(book)}
+        style={{ marginTop: '12px', padding: '8px 12px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+      >
+        Add to Library
+      </button>  
       </div>
     );
   };
