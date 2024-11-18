@@ -3,33 +3,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 const Navbar = () => {
-  const [searchQuery, setSearchQuery] = useState(''); // State for search query input
-  const [showBooks, setShowBooks] = useState(false); // State to control the visibility of the book list
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to check login status
-  const navigate = useNavigate();
+  const [loginCheck, setLoginCheck] = useState(false);
 
-  // Function to check login status
-  const checkLoginStatus = () => {
-    setIsLoggedIn(Auth.loggedIn());
+  const checkLogin = () => {
+    if (Auth.loggedIn()) {
+      setLoginCheck(true); // Set loginCheck to true if user is logged in
+    }
   };
 
   useEffect(() => {
-    checkLoginStatus(); // Update login status on component mount
-  }, []);
-
-  // Function to handle search form submission
-  const handleSearchSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
-  };
-
-  // Book titles for demo purposes (can be dynamic or fetched from an API)
-  const books = [
-    "React for Beginners",
-    "Advanced JavaScript",
-    "TypeScript Essentials",
-    "Fullstack Development with Node.js",
-  ];
+    checkLogin(); // Call checkLogin() function to update loginCheck state
+  }, [loginCheck]);
 
   return (
     <header className="navbar display-flex justify-space-between align-center p-2 mint-green">
@@ -60,6 +44,7 @@ const Navbar = () => {
             Login
           </Link>
         ) : (
+          <div>
           <button
             onClick={() => {
               Auth.logout();
@@ -69,25 +54,14 @@ const Navbar = () => {
           >
             Logout
           </button>
-        )}
-
-        {/* Toggle Books button */}
-        <button className="btn books-btn" onClick={() => setShowBooks(!showBooks)}>
-          {showBooks ? 'Hide Books' : 'Show Books'}
+            <button className="books-btn">
+        <Link to="/SearchBooks" className="no-underline text-shadow-lg">
+              Search
+            </Link>
         </button>
+          </div>
+        )}
       </div>
-
-      {/* Conditionally render the books list */}
-      {showBooks && (
-        <div className="book-list-box">
-          <h2>Suggested Books</h2>
-          <ul>
-            {books.map((book, index) => (
-              <li key={index}>{book}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </header>
   );
 };
