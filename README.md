@@ -74,10 +74,10 @@ The live, deployed version of Novel-Nook is available at:
 # 📣 Contact
 For any questions, feedback, or contributions, feel free to get in touch with our development team:
 
-📕 [Jackie's GitHub] (http://github.com/jmalon10)
-📙 [Judymae's GitHub] (http://github.com/judymaej)
-📗 [Kol's GitHub] (http://github.com/kol3wang)
-📘 [Sahira's GitHub] (https://github.com/Sahiramarte17)
+📕 Jackie's GitHub
+📙 Judymae's GitHub
+📗 Kol's GitHub
+📘 Sahira's GitHub
 
 # 🤝 Acknowledgements
 Special thanks to all contributors, mentors, and libraries that made Novel-Nook possible:
