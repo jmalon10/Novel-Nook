@@ -40,7 +40,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import './index.css'
-
 import App from './App.tsx';
 import SearchBooks from './pages/SearchBooks.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
