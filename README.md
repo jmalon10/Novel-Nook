@@ -82,12 +82,17 @@ For any questions, feedback, or contributions, feel free to get in touch with ou
 # 🤝 Acknowledgements
 Special thanks to all contributors, mentors, and libraries that made Novel-Nook possible:
 
-React.js
-Node.js
-MongoDB
-Express.js
-JWT
-Styled Components
+* React.js
+* Node.js
+* MongoDB
+* Express.js
+* JWT
+* Styled Components
+
 And thank you to all the users who inspire us to continue developing and improving Novel-Nook!
+
+# 📚 Happy Reading!
+
+
 
 
