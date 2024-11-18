@@ -1,4 +1,7 @@
 # Novel-Nook 📚
+Novels that inspire, stories that aspire. Get lost in a book with Novel Nook!
+
+Welcome to Novel-Nook, your go-to platform for discovering, reading, and sharing novels from a wide variety of genres. Whether you're a fan of classic literature, contemporary tales, or emerging indie authors, Novel-Nook brings them all together in a beautifully designed, user-friendly web application.
 
 ## Table of Contents
 
