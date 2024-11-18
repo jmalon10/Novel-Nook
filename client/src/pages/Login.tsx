@@ -44,7 +44,7 @@ const Login = () => {
       <main
         className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b"
         style={{
-          background: 'linear-gradient(to bottom, #8a2be2, #4b0082)', // Gradient using hex codes
+          background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Gradient using hex codes
         }}
       >
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
@@ -75,12 +75,14 @@ const Login = () => {
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button
-                  className="w-full bg-purple-600 text-white p-2 rounded-lg hover:bg-purple-700"
-                  type="submit"
-                >
-                  Submit
-                </button>
+              <button
+                className="w-full text-white p-2 rounded-lg"
+                style={{
+                  backgroundColor: '#44345D', // Background color in hex
+                }}
+              >
+                Submit
+              </button>
               </form>
             )}
   
