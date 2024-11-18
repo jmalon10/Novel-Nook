@@ -5,8 +5,7 @@ import { openLibraryRoutes } from './routes/api/openLibraryRoutes.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = fileURLToPath(import.meta.url);
 
 // Import the ApolloServer class
 import { ApolloServer } from '@apollo/server';
