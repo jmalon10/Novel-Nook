@@ -29,7 +29,7 @@
 //   export default router;
 // /server/src/routes/api/openLibraryRoutes.ts
 import express, { Request, Response } from 'express';
-import dotenv, { parse } from 'dotenv';
+import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import { OpenLibraryApiResponse, OpenLibraryBookDetails } from '../../types/express/openLibrary.interface';
 

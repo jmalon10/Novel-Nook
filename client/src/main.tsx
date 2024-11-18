@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink, ApolloLink } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 
 import App from './App.tsx';
 import SearchBooks from './pages/SearchBooks.tsx';
@@ -23,7 +24,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 // Apollo Client setup
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql', // Replace with your actual GraphQL endpoint
+  link: ApolloLink.from([
+    errorLink,
+    new HttpLink({ uri: 'http://localhost:3000/graphql' }), // Update with your GraphQL server URL
+  ]),
   cache: new InMemoryCache(),
 });
 

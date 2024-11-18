@@ -1,14 +1,3 @@
-// const SearchBooks = () => {
-//   return (
-//     <section>
-//       <h1>Thank you for coming!</h1>
-//       <h1></h1>
-//     </section>
-//   );
-// };
-
-// export default SearchBooks;
-
 import React, { useState } from 'react';
 import axios from 'axios';
 

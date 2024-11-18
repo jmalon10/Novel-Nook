@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import Auth from '../utils/auth';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -16,43 +16,26 @@ const Navbar = () => {
   }, [loginCheck]);
 
   return (
-    <header className="navbar display-flex justify-space-between align-center p-2 mint-green">
-      <h1>Welcome to Novel-Nook!</h1>
-      
-      <nav>
-        <ul className="nav-links">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/search">Search Books</Link></li>
-        </ul>
-      </nav>
-
-      <div className="search-and-auth">
-        {/* Search form */}
-        <form onSubmit={handleSearchSubmit} className="search-form">
-          <input
-            type="text"
-            placeholder="Search books"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <button type="submit">Search</button>
-        </form>
-
-        {/* Login/Logout button */}
-        {!isLoggedIn ? (
-          <Link to="/login" className="btn bg-activeGreen hover:bg-green-600 text-white py-2 px-4 rounded-lg">
-            Login
-          </Link>
+    <header className="display-flex justify-space-between align-center p-2 mint-green">
+      <h1>Welcome Novel-Nook!</h1>
+      <div className="button-group">
+        {/* Login button */}
+        {!loginCheck ? (
+          <button className="btn bg-activeGreen hover:bg-green-600 text-white py-2 px-4 rounded-lg">
+            <Link to="/login" className="no-underline text-shadow-lg">
+              Login
+            </Link>
+          </button>
         ) : (
           <div>
           <button
+            className="btn bg-mediumGray hover:bg-lightGray text-white py-2 px-4 rounded-lg"
+            type="button"
             onClick={() => {
               Auth.logout();
-              setIsLoggedIn(false); // Update login status after logout
             }}
-            className="btn bg-mediumGray hover:bg-lightGray text-white py-2 px-4 rounded-lg"
           >
-            Logout
+            <span className="text-shadow-lg">Logout</span>
           </button>
             <button className="books-btn">
         <Link to="/SearchBooks" className="no-underline text-shadow-lg">
