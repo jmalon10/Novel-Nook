@@ -65,4 +65,10 @@ Run the Application
 2) Start the client:
 3) Navigate to http://localhost:3000 to view the application in action.
 
+# 🌍 Deployed Application
+The live, deployed version of Novel-Nook is available at:
+
+# Visit Novel-Nook
+(Note: This link is just an example. Replace with your actual deployed app URL.)
+
 
