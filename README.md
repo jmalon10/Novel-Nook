@@ -40,5 +40,13 @@ Dark/Light Mode: Choose the reading experience that suits you best.
 # 📝 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+# 🔧 Technologies Used
+Frontend: React.js, Redux, Axios
+Backend: Node.js, Express.js
+Database: MongoDB
+Authentication: JWT (JSON Web Tokens)
+Styling: CSS3, Styled Components
+Deployment: render
+
 
 
