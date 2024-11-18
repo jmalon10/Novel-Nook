@@ -71,4 +71,23 @@ The live, deployed version of Novel-Nook is available at:
 # Visit Novel-Nook
 (Note: This link is just an example. Replace with your actual deployed app URL.)
 
+# 📣 Contact
+For any questions, feedback, or contributions, feel free to get in touch with our development team:
+
+📕 Jackie's GitHub
+📙 Judymae's GitHub
+📗 Kol's GitHub
+📘 Sahira's GitHub
+
+# 🤝 Acknowledgements
+Special thanks to all contributors, mentors, and libraries that made Novel-Nook possible:
+
+React.js
+Node.js
+MongoDB
+Express.js
+JWT
+Styled Components
+And thank you to all the users who inspire us to continue developing and improving Novel-Nook!
+
 
