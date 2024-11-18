@@ -14,7 +14,12 @@ const Home = () => {
   }, [loginCheck]);
 
   return (
-    <div className="bg-gradient-to-b from-purple-500 to-purple-900 min-h-screen flex flex-col text-white">
+    <div
+      className="min-h-screen flex flex-col text-white"
+      style={{
+        background: "linear-gradient(to bottom, #856F8C, #44345D)", // Gradient with hex codes
+      }}
+    >
       {loginCheck ? (
         <div className="flex flex-1 items-center justify-center">
           <h1 className="text-4xl font-bold">Welcome to the home page!</h1>
