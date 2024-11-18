@@ -48,5 +48,21 @@ Authentication: JWT (JSON Web Tokens)
 Styling: CSS3, Styled Components
 Deployment: render
 
+# ⚙️ Installation and Usage
+
+Setup
+1) Clone the repository
+2) Install dependencies:
+    For the client (frontend):
+    For the server (backend):
+3) Environment Setup:
+
+Create a .env file in both the client and server directories to store your environment variables.
+For the server, ensure you have your MongoDB connection string, JWT secrets, and any other necessary API keys set up in the .env file.
+
+Run the Application
+1) Start the server:
+2) Start the client:
+3) Navigate to http://localhost:3000 to view the application in action.
 
 
