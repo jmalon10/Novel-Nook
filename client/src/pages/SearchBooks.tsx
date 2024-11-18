@@ -1,13 +1,4 @@
-// const SearchBooks = () => {
-//   return (
-//     <section>
-//       <h1>Thank you for coming!</h1>
-//       <h1></h1>
-//     </section>
-//   );
-// };
 import React, { useState } from 'react';
-
 // Define the structure of each book object
 interface Book {
   cover_id: number;
@@ -16,36 +7,27 @@ interface Book {
   cover_url?: string;
   genres?: string[];
 }
-
 const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState(''); // State for search input
   const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
   const [loading, setLoading] = useState(false); // State for loading indicator
-  const [error, setError] = useState<string | null>(null); 
-
+  const [error, setError] = useState<string | null>(null);
   // Function to handle form submission and fetch books from Open Library API
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     if (!searchInput.trim()) {
       return;
     }
-
     setLoading(true); // Start loading
-    setError(null); 
-
+    setError(null);
     try {
-      
       const response = await fetch(
         `https://openlibrary.org/search.json?title=${encodeURIComponent(searchInput.trim())}&limit=10`
       );
-
       if (!response.ok) {
         throw new Error("Failed to fetch books from Open Library.");
       }
-
       const data = await response.json();
-
       // Map through the results and format them as needed
       const books = data.docs.map((book: any) => ({
         title: book.title,
@@ -54,16 +36,14 @@ const SearchBooks = () => {
         cover_url: book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` : null,
         genres: book.subject ? book.subject.slice(0, 5) : []
       }));
-
       setSearchedBooks(books);
     } catch (error) {
       console.error("Error fetching books:", error);
-      setError("An error occurred while fetching books. Please try again."); 
+      setError("An error occurred while fetching books. Please try again.");
     } finally {
       setLoading(false); // Stop loading
     }
   };
-
   // Render the form and search results
   return (
     <section>
@@ -77,13 +57,10 @@ const SearchBooks = () => {
         />
         <button type="submit">Search</button>
       </form>
-
       {/* Show loading message */}
       {loading && <p>Loading...</p>}
-
       {/* Show error message */}
-      {error && <p className="error-message">{error}</p>} 
-
+      {error && <p className="error-message">{error}</p>}
       {/* Display the search results */}
       <div>
         {searchedBooks.length > 0 && !loading ? (
@@ -102,5 +79,4 @@ const SearchBooks = () => {
     </section>
   );
 };
-
 export default SearchBooks;
