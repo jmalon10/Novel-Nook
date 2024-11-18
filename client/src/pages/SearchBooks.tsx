@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Book from '../components/BookCard';
+import BookCard from '../components/BookCard';
 // Define the structure of each book object
 interface Book {
   cover_id: number;
@@ -61,16 +63,11 @@ const SearchBooks = () => {
       {loading && <p>Loading...</p>}
       {/* Show error message */}
       {error && <p className="error-message">{error}</p>}
-      {/* Display the search results */}
-      <div>
+       {/* Display the search results using BookCard */}
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {searchedBooks.length > 0 && !loading ? (
           searchedBooks.map((book) => (
-            <div key={book.cover_id}>
-              <h2>{book.title}</h2>
-              <p>{book.author_name ? book.author_name.join(", ") : "Unknown Author"}</p>
-              {book.cover_url && <img src={book.cover_url} alt={`${book.title} cover`} />}
-              <p>Genres: {book.genres ? book.genres.join(", ") : "No genres available"}</p>
-            </div>
+            <BookCard key={book.cover_id} book={book} />
           ))
         ) : (
           !loading && !error && <p>No books found. Try searching for something else.</p>
@@ -79,4 +76,5 @@ const SearchBooks = () => {
     </section>
   );
 };
+
 export default SearchBooks;

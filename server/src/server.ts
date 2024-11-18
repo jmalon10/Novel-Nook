@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import { openLibraryRoutes } from './routes/api/openLibraryRoutes.js';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-const __dirname = fileURLToPath(import.meta.url);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Import the ApolloServer class
 import { ApolloServer } from '@apollo/server';
