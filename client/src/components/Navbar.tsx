@@ -3,8 +3,6 @@ import Auth from '../utils/auth';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  // State to control the visibility of the book list
-  const [showBooks, setShowBooks] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
 
   const checkLogin = () => {
@@ -16,19 +14,6 @@ const Navbar = () => {
   useEffect(() => {
     checkLogin(); // Call checkLogin() function to update loginCheck state
   }, [loginCheck]);
-
-  // Book titles (can be dynamic or fetched from an API)
-  const books = [
-    "Book 1: React for Beginners",
-    "Book 2: Advanced JavaScript",
-    "Book 3: TypeScript Essentials",
-    "Book 4: Fullstack Development with Node.js",
-  ];
-
-  // Toggle book visibility on button click
-  const toggleBooks = () => {
-    setShowBooks((prevState) => !prevState);
-  };
 
   return (
     <header className="display-flex justify-space-between align-center p-2 mint-green">
@@ -42,6 +27,7 @@ const Navbar = () => {
             </Link>
           </button>
         ) : (
+          <div>
           <button
             className="btn bg-mediumGray hover:bg-lightGray text-white py-2 px-4 rounded-lg"
             type="button"
@@ -51,25 +37,14 @@ const Navbar = () => {
           >
             <span className="text-shadow-lg">Logout</span>
           </button>
-        )}
-
-        {/* Books button */}
-        <button className="books-btn" onClick={toggleBooks}>
-          Search
+            <button className="books-btn">
+        <Link to="/SearchBooks" className="no-underline text-shadow-lg">
+              Search
+            </Link>
         </button>
+          </div>
+        )}
       </div>
-
-      {/* Conditionally render the books list */}
-      {showBooks && (
-        <div className="book-list-box">
-          <h2>Books</h2>
-          <ul>
-            {books.map((book, index) => (
-              <li key={index}>{book}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </header>
   );
 };
