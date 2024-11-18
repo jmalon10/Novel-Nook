@@ -14,6 +14,17 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
   const [loading, setLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState<string | null>(null);
+
+  const handleAddToLibrary = (book: Book) => {
+    const savedBooks: Book[] = JSON.parse(localStorage.getItem('myLibrary') || '[]');
+    if (!savedBooks.some(savedBook => savedBook.cover_id === book.cover_id)) {
+      savedBooks.push(book);
+      localStorage.setItem('myLibrary', JSON.stringify(savedBooks));
+      alert(`${book.title} has been added to your library!`);
+    } else {
+      alert(`${book.title} is already in your library.`);
+    }
+  };
   // Function to handle form submission and fetch books from Open Library API
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -64,10 +75,14 @@ const SearchBooks = () => {
       {/* Show error message */}
       {error && <p className="error-message">{error}</p>}
        {/* Display the search results using BookCard */}
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {searchedBooks.length > 0 && !loading ? (
           searchedBooks.map((book) => (
-            <BookCard key={book.cover_id} book={book} />
+            <BookCard 
+              key={book.cover_id} 
+              book={book} 
+              onAddToLibrary={handleAddToLibrary}
+            />
           ))
         ) : (
           !loading && !error && <p>No books found. Try searching for something else.</p>
