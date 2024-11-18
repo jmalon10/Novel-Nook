@@ -45,6 +45,7 @@ import SearchBooks from './pages/SearchBooks.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Login from './pages/Login.tsx';
 import Home from './pages/Home.tsx';
+import CreateUser from './pages/CreateUser.tsx';
 
 // Error handling for Apollo Client
 const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: '/SearchBooks',
         element: <SearchBooks />,
+      },
+      {
+        path: '/CreateUser',
+        element: <CreateUser />,
       },
     ],
   },
