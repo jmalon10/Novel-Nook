@@ -28,5 +28,14 @@ Core Features:
 * Rate and review books to help others discover hidden gems.
 * Discover books recommended by other users based on your tastes.
 
+# ✨ Features
+Book Discovery: A curated library with easy-to-navigate categories.
+User Accounts: Personalized bookshelves and reading progress tracking.
+Ratings and Reviews: Share your thoughts and see what others think.
+Search & Filters: Efficient search bar with filtering options by genre, popularity, or author.
+Responsive Design: Seamlessly works on all devices — desktop, tablet, or mobile.
+Social Integration: Follow users and recommend books to friends.
+Dark/Light Mode: Choose the reading experience that suits you best.
+
 
 
