@@ -37,5 +37,8 @@ Responsive Design: Seamlessly works on all devices — desktop, tablet, or mobil
 Social Integration: Follow users and recommend books to friends.
 Dark/Light Mode: Choose the reading experience that suits you best.
 
+# 📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
 
 
