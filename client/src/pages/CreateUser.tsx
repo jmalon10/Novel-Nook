@@ -41,7 +41,7 @@ const CreateUser = () => {
       if (err.message.includes('duplicate key')) {
         setCustomError('Username/email already exists.');
       } else {
-        setCustomError('An unexpected error occurred. Please try again.');
+        setCustomError( err.message);
       }
     }
   };
