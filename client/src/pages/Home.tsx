@@ -20,7 +20,7 @@ const Home = () => {
       ) : (
         <div>
         <h1>You are not logged in!</h1>
-        <p>Please login to continue</p>
+        <p className="text-3xl font-bold underline">Please login to continue</p>
         </div>
       )}
     </>
