@@ -16,7 +16,7 @@ const Navbar = () => {
   }, [loginCheck]);
 
   return (
-    <header className="display-flex justify-space-between align-center p-2 mint-green">
+    <header style={styles.header}>
       {/* Apply the styles directly to the <h1> element */}
       <h1 style={styles.title}>Welcome to Novel-Nook!</h1>
       <div className="button-group">
@@ -56,8 +56,14 @@ const Navbar = () => {
   );
 };
 
-// Inline styles for title
+// Inline styles for title and header background
 const styles = {
+  header: {
+    background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Use 'background' instead of 'backgroundColor' for gradients
+    color: '#fff', // White text for contrast
+    padding: '20px',
+    textAlign: 'center',
+  },
   title: {
     fontSize: '4rem', // Makes the title much bigger
     fontFamily: "'Cinzel', serif", // Fancy font style (make sure to import this font)
@@ -71,4 +77,3 @@ const styles = {
 };
 
 export default Navbar;
-
