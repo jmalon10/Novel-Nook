@@ -41,6 +41,8 @@ const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => 
   }, [genre]);
 
   const handleAddToLibrary = (book: Book) => {
+    console.log(`Added "${book.title}" to the library`);
+    // Logic to save the book to the user's library (e.g., API call, state management)
     const savedBooks: Book[] = JSON.parse(localStorage.getItem('myLibrary') || '[]');
     if (!savedBooks.some(savedBook => savedBook.title === book.title)) {
       savedBooks.push(book);
@@ -67,6 +69,7 @@ const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => 
       </button>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {books.map((book, index) => (
+          
           <div
             key={index}
             className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
