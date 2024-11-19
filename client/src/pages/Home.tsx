@@ -21,92 +21,72 @@ const Home = () => {
   };
 
   return (
-      <div>
-        {loginCheck ? (
-          <>
-            {!selectedGenre ? (
-              <div>
-                <h1>Welcome to the Best Sellers Portal!</h1>
-                <button
-                  onClick={handleLogout}
-                  style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#e74c3c',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Logout
-                </button>
-                <header></header>
-                  <h2>Check out the current best sellers!</h2>
+    <div
+      style={{
+        background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Gradient using hex codes
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        textAlign: 'center',
+        padding: '20px',
+      }}
+    >
+      {loginCheck ? (
+        <>
+          {!selectedGenre ? (
+            <div className="text-center space-y-8">
+              <h1 className="text-4xl font-bold">Welcome to the Best Sellers Portal!</h1>
+              <button
+                onClick={handleLogout}
+                className="px-6 py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition duration-300"
+              >
+                Logout
+              </button>
+              <h2 className="text-2xl font-semibold">Check out the current best sellers!</h2>
+              <div
+                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
+              >
+                {[
+                  { title: "Young Adult", genre: "young-adult", image: "url-to-childrens-books.jpg" },
+                  { title: "Crime", genre: "crime-and-punishment", image: "url-to-fiction.jpg" },
+                  { title: "Relationships", genre: "relationships", image: "url-to-nonfiction.jpg" },
+                  { title: "Series Books", genre: "series-books", image: "url-to-series.jpg" },
+                ].map((card, index) => (
                   <div
-                    className="card-container"
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                      gap: '20px',
-                      padding: '20px',
-                    }}
+                    key={index}
+                    className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
                   >
-                    {[
-                      { title: "Young Adult", genre: "young-adult", image: "url-to-childrens-books.jpg" },
-                      { title: "Crime", genre: "crime-and-punishment", image: "url-to-fiction.jpg" },
-                      { title: "Relationships", genre: "relationships", image: "url-to-nonfiction.jpg" },
-                      { title: "Series Books", genre: "series-books", image: "url-to-series.jpg" },
-                    ].map((card, index) => (
-                      <div
-                        key={index}
-                        className="card"
-                        style={{
-                          backgroundColor: 'white',
-                          border: '1px solid #ddd',
-                          borderRadius: '8px',
-                          padding: '16px',
-                          textAlign: 'center',
-                          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                          transition: 'transform 0.2s',
-                        }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLDivElement).style.transform = 'scale(1.05)';
-                        }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLDivElement).style.transform = 'scale(1)';
-                        }}
-                      >
-                        <img
-                          src={card.image}
-                          alt={card.title}
-                        />
-                        <button
-                          onClick={() => handleExplore(card.genre)}
-                          style={{
-                            padding: '10px 15px',
-                            backgroundColor: '#3498db',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '5px',
-                            cursor: 'pointer',
-                          }}
-                        >
-                          Explore
-                        </button>
-                      </div>
-                    ))}
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="w-full h-40 object-cover rounded-t-lg mb-4"
+                    />
+                    <h3 className="text-lg font-bold mb-2">{card.title}</h3>
+                    <button
+                      onClick={() => handleExplore(card.genre)}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
+                    >
+                      Explore
+                    </button>
                   </div>
-                </div>
-              ) : (
-                <BooksList genre={selectedGenre} goBack={() => setSelectedGenre(null)} />
-              )}
-            </>
+                ))}
+              </div>
+            </div>
           ) : (
-            <div></div>
+            <BooksList genre={selectedGenre} goBack={() => setSelectedGenre(null)} />
           )}
+        </>
+      ) : (
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">Please log in to explore the Best Sellers Portal!</h1>
         </div>
-      );
-    };
+      )}
+    </div>
+  );
+};
 
 export default Home;
 
