@@ -40,7 +40,7 @@ const Home = () => {
                 >
                   Logout
                 </button>
-                <header>
+                <header></header>
                   <h2>Check out the current best sellers!</h2>
                   <div
                     className="card-container"
