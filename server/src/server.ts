@@ -5,6 +5,7 @@ import { expressMiddleware } from '@apollo/server/express4'; // Import expressMi
 import { typeDefs, resolvers } from './schemas/index.js'; // Adjust import paths
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import db from './config/connection.js';
 dotenv.config();
 
 const authenticateToken = (req: express.Request) => {
@@ -26,21 +27,24 @@ const server = new ApolloServer({
 });
 
 const startApolloServer = async () => {
-  await server.start();
+  server.start().then(() => {
+    app.use('/graphql', express.json(), (req: any, _res, next) => {
+      req = authenticateToken(req); 
+      next();
+    }, expressMiddleware(server, {
+      context: async ({ req }) => ({ user: req.user }),
+    }))
+  }
+  );
+
+  await db();
+  console.log('Connected to MongoDB!');
   const app = express();
   const PORT = process.env.PORT || 3001;
 
   // Middleware for handling GraphQL requests
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json());
-
-  // Set up expressMiddleware for Apollo Server and pass context here
-  app.use('/graphql', expressMiddleware(server, {
-    context: async ({ req }: { req: express.Request }) => {
-      const user = authenticateToken(req); // Authenticate token and get user data
-      return { user }; // Return user in the context
-    },
-  }));
 
   // Serve static files in production
   if (process.env.NODE_ENV === 'production') {
@@ -53,6 +57,7 @@ const startApolloServer = async () => {
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}`);
+    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
 };
 

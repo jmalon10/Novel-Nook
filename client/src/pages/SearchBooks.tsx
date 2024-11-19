@@ -4,7 +4,6 @@ import BookCard from '../components/BookCard';
 import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from '../utils/mutations';
 
-const [addBook] = useMutation(ADD_BOOK);
 
 // Define the structure of each book object
 interface Book {
@@ -19,7 +18,7 @@ const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
   const [loading, setLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState<string | null>(null);
-
+  const [addBook] = useMutation(ADD_BOOK);
   const handleAddToLibrary = async (book: any) => {
     try {
       await addBook({

@@ -113,7 +113,7 @@ const resolvers = {
   
       return user; // Return the updated user object
     },
-    emoveBook: async (_parent: any, { cover_id }: { cover_id: number }, context: any) => {
+    removeBook: async (_parent: any, { cover_id }: { cover_id: number }, context: any) => {
       // Ensure the user is authenticated
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to perform this action.');
