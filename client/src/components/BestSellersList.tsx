@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import BookCard from './BookCard'; // Reusing the existing BookCard component
 
 interface Book {
-  cover_id?: number; // Placeholder since NYT doesn't provide this
+  cover_id?: number;
   title: string;
   author_name: string[]; // Transformed from the "author" field
   cover_url?: string;
@@ -41,19 +41,58 @@ const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => 
   }, [genre]);
 
   const handleAddToLibrary = (book: Book) => {
-    console.log(`Added "${book.title}" to the library`);
-    // Logic to save the book to the user's library (e.g., API call, state management)
+    const savedBooks: Book[] = JSON.parse(localStorage.getItem('myLibrary') || '[]');
+    if (!savedBooks.some(savedBook => savedBook.title === book.title)) {
+      savedBooks.push(book);
+      localStorage.setItem('myLibrary', JSON.stringify(savedBooks));
+      alert(`"${book.title}" has been added to your library!`);
+    } else {
+      alert(`"${book.title}" is already in your library.`);
+    }
   };
 
-  if (error) return <div>Error: {error}</div>;
+  if (error)
+    return <div className="text-center text-lg font-medium text-red-600">Error: {error}</div>;
 
   return (
-    <div>
-      <button onClick={goBack}>Go Back</button>
-      <h1>Top 10 Bestsellers in {genre.replace('-', ' ')}</h1>
-      <div className="book-list" style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '1rem' }}>
+    <div className="py-8 px-4">
+      <h1 className="text-3xl font-bold text-center text-white mb-6">
+        Top 10 Bestsellers in {genre.replace('-', ' ')}
+      </h1>
+      <button
+        onClick={goBack}
+        className="mx-auto mb-8 px-6 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition duration-300 block"
+      >
+        Go Back
+      </button>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {books.map((book, index) => (
-          <BookCard key={index} book={book} onAddToLibrary={handleAddToLibrary} />
+          <div
+            key={index}
+            className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
+          >
+            {book.cover_url ? (
+              <img
+                src={book.cover_url}
+                alt={`${book.title} cover`}
+                className="w-full h-40 object-cover rounded-t-lg mb-4"
+              />
+            ) : (
+              <div className="w-full h-40 bg-gray-200 rounded-t-lg mb-4 flex items-center justify-center">
+                <p className="text-gray-500">No Cover Available</p>
+              </div>
+            )}
+            <h3 className="text-lg font-bold mb-2">{book.title}</h3>
+            <p className="text-gray-600 mb-4">
+              {book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
+            </p>
+            <button
+              onClick={() => handleAddToLibrary(book)}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+            >
+              Add to Library
+            </button>
+          </div>
         ))}
       </div>
     </div>
@@ -61,5 +100,3 @@ const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => 
 };
 
 export default BooksList;
-
-
