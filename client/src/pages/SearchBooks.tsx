@@ -88,7 +88,7 @@ const SearchBooks = () => {
 
       {error && (
         <p className="text-center text-lg font-medium text-red-600">{error}</p>
-      
+         /* Show error message */
       )}
   {/* Display the search results using BookCard */}
       {searchedBooks.length > 0 && !loading ? (
