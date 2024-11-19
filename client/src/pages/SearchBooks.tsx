@@ -27,6 +27,8 @@ const SearchBooks = () => {
             title: book.title,
             author: book.author_name.join(', '),
             genre: book.genres ? book.genres[0] : 'Unknown',
+            cover_id: book.cover_i,
+            cover_url: book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` : null,
           },
         },
       });

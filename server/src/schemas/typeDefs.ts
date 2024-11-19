@@ -11,6 +11,8 @@ type Book {
   title: String!
   author: String!
   genre: String
+  cover_id: Int
+  cover_url: String
 }
 
 # Input type for adding a book
@@ -18,6 +20,8 @@ input AddBookInput {
   title: String!
   author: String!
   genre: String
+  cover_id: Int
+  cover_url: String
 }
 
 # Type for the authentication payload

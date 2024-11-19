@@ -5,6 +5,8 @@ export const GET_USER_BOOKS = gql`
       author
       genre
       title
+      cover_id
+      cover_url
     }
   }
 `;

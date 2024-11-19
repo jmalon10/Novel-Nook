@@ -32,6 +32,8 @@ export const ADD_BOOK = gql`
         title
         author
         genre
+        cover_id
+        cover_url
       }
     }
   }
