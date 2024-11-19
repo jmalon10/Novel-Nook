@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Book from '../components/BookCard';
+import BookCard from '../components/BookCard';
+// Define the structure of each book object
 
 interface Book {
   cover_id: number;
@@ -8,10 +11,10 @@ interface Book {
   genres?: string[];
 }
 
-const SearchBooks: React.FC = () => {
-  const [searchInput, setSearchInput] = useState('');
-  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(false);
+const SearchBooks = () => {
+  const [searchInput, setSearchInput] = useState(''); // State for search input
+  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
+  const [loading, setLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState<string | null>(null);
 
   const handleAddToLibrary = (book: Book) => {
@@ -24,13 +27,13 @@ const SearchBooks: React.FC = () => {
       alert(`${book.title} is already in your library.`);
     }
   };
-
+  // Function to handle form submission and fetch books from Open Library API
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!searchInput.trim()) {
       return;
     }
-    setLoading(true);
+    setLoading(true);  // Start loading
     setError(null);
 
     try {
@@ -40,7 +43,7 @@ const SearchBooks: React.FC = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch books from Open Library.');
       }
-      const data = await response.json();
+      const data = await response.json(); // Map through the results and format them as needed
       const books = data.docs.map((book: any) => ({
         title: book.title,
         author_name: book.author_name || ['Unknown Author'],
@@ -53,10 +56,10 @@ const SearchBooks: React.FC = () => {
       console.error('Error fetching books:', error);
       setError('An error occurred while fetching books. Please try again.');
     } finally {
-      setLoading(false);
+      setLoading(false);  // Stop loading
     }
   };
-
+  // Render the form and search results
   return (
     <section className="py-10 px-4">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books</h1>
@@ -78,15 +81,16 @@ const SearchBooks: React.FC = () => {
           Search
         </button>
       </form>
-
+  {/* Show loading message */}
       {loading && (
         <p className="text-center text-lg font-medium text-gray-600">Loading...</p>
       )}
 
       {error && (
         <p className="text-center text-lg font-medium text-red-600">{error}</p>
+      
       )}
-
+  {/* Display the search results using BookCard */}
       {searchedBooks.length > 0 && !loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {searchedBooks.map((book) => (

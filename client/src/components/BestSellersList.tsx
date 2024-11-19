@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import BookCard from './BookCard'; // Reusing the existing BookCard component
 
 interface Book {
-  cover_id?: number;
+  cover_id?: number;  // Placeholder since NYT doesn't provide this
   title: string;
   author_name: string[]; // Transformed from the "author" field
   cover_url?: string;
