@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import BookCard from '../components/BookCard';
 
 interface Book {
   cover_id: number;
@@ -9,10 +8,10 @@ interface Book {
   genres?: string[];
 }
 
-const SearchBooks = () => {
-  const [searchInput, setSearchInput] = useState(''); // State for search input
-  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results
-  const [loading, setLoading] = useState(false); // State for loading indicator
+const SearchBooks: React.FC = () => {
+  const [searchInput, setSearchInput] = useState('');
+  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const handleAddToLibrary = (book: Book) => {
@@ -31,8 +30,9 @@ const SearchBooks = () => {
     if (!searchInput.trim()) {
       return;
     }
-    setLoading(true); // Start loading
+    setLoading(true);
     setError(null);
+
     try {
       const response = await fetch(
         `https://openlibrary.org/search.json?title=${encodeURIComponent(searchInput.trim())}&limit=10`
@@ -53,20 +53,19 @@ const SearchBooks = () => {
       console.error('Error fetching books:', error);
       setError('An error occurred while fetching books. Please try again.');
     } finally {
-      setLoading(false); // Stop loading
+      setLoading(false);
     }
   };
 
   return (
-    <section className="min-h-screen bg-gray-100 py-10 px-4">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books 🔍</h1>
+    <section className="py-10 px-4">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books</h1>
       <form
         onSubmit={handleFormSubmit}
         className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto"
       >
         <input
           type="text"
-      
           placeholder="Search by title"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
@@ -88,26 +87,53 @@ const SearchBooks = () => {
         <p className="text-center text-lg font-medium text-red-600">{error}</p>
       )}
 
-      <div className="flex flex-wrap justify-center gap-6">
-        {searchedBooks.length > 0 && !loading ? (
-          searchedBooks.map((book) => (
-            <BookCard
+      {searchedBooks.length > 0 && !loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          {searchedBooks.map((book) => (
+            <div
               key={book.cover_id}
-              book={book}
-              onAddToLibrary={handleAddToLibrary}
-            />
-          ))
-        ) : (
-          !loading &&
-          !error && (
+              className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
+            >
+              {book.cover_url ? (
+                <img
+                  src={book.cover_url}
+                  alt={`${book.title} cover`}
+                  className="w-full h-40 object-cover rounded-t-lg mb-4"
+                />
+              ) : (
+                <div className="w-full h-40 bg-gray-200 rounded-t-lg mb-4 flex items-center justify-center">
+                  <p className="text-gray-500">No Cover Available</p>
+                </div>
+              )}
+              <h3 className="text-lg font-bold mb-2">{book.title}</h3>
+              <p className="text-gray-600 mb-2">
+                {book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                Genres: {book.genres?.join(', ') || 'Not Specified'}
+              </p>
+              <button
+                onClick={() => handleAddToLibrary(book)}
+                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
+              >
+                Add to Library
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        !loading &&
+        !error && (
+          <div className="flex items-center justify-center h-60">
             <p className="text-center text-lg font-medium text-gray-600">
-              No books found ☹️. Try searching for something else.
+              No books found ☹️ Try searching for something else.
             </p>
-          )
-        )}
-      </div>
+          </div>
+        )
+      )}
     </section>
   );
 };
 
 export default SearchBooks;
+
