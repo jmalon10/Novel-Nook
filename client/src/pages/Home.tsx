@@ -50,10 +50,13 @@ const Home = () => {
                 className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto"
               >
                 {[
-                  { title: "Young Adult", genre: "young-adult", image: "url-to-childrens-books.jpg" },
-                  { title: "Crime", genre: "crime-and-punishment", image: "url-to-fiction.jpg" },
-                  { title: "Relationships", genre: "relationships", image: "url-to-nonfiction.jpg" },
-                  { title: "Series Books", genre: "series-books", image: "url-to-series.jpg" },
+                  { title: "Young Adult", genre: "young-adult", image: "https://m.media-amazon.com/images/I/41RDgCHpGTL._SY445_SX342_.jpg" },
+                  { title: "Crime", genre: "crime-and-punishment", image: "https://m.media-amazon.com/images/I/41x6HtLdEhL._SY445_SX342_QL70_FMwebp_.jpg" },
+                  { title: "Relationships", genre: "relationships", image: "https://m.media-amazon.com/images/I/81xXA1fRHbL._SX522_.jpg" },
+                  {title: "Series Books",
+                  genre: "series-books",
+                  image: "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg", // Harry Potter book cover
+                },
                 ].map((card, index) => (
                   <div
                     key={index}
