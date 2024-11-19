@@ -23,4 +23,16 @@ export const ADD_USER = gql`
     }
   }
 `;
-
+export const ADD_BOOK = gql`
+  mutation addBook($input: AddBookInput!) {
+    addBook(input: $input) {
+      _id
+      books {
+        _id
+        title
+        author
+        genre
+      }
+    }
+  }
+`;
