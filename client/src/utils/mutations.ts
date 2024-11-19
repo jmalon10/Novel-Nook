@@ -36,3 +36,17 @@ export const ADD_BOOK = gql`
     }
   }
 `;
+
+export const REMOVE_BOOK = gql`
+mutation RemoveBook($cover_id: Int!) {
+  removeBook(cover_id: $cover_id) {
+    books {
+      cover_id
+      title
+      author_name
+      cover_url
+      genres
+    }
+  }
+}
+`;

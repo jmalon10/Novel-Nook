@@ -21,12 +21,13 @@ const Home = () => {
   };
 
   return (
-
+    <div style={{ fontFamily: 'Arial, sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh', padding: '20px' }}>
       {loginCheck ? (
         <>
           {!selectedGenre ? (
             <div>
-
+              <header style={{ textAlign: 'center', marginBottom: '20px' }}>
+                <h1 style={{ color: '#333', fontSize: '2.5rem', marginBottom: '10px' }}>
                   Welcome to the Best Sellers Portal!
                 </h1>
                 <button
@@ -43,7 +44,7 @@ const Home = () => {
                   Logout
                 </button>
               </header>
-
+              <h2 style={{ textAlign: 'center', color: '#555', marginBottom: '30px' }}>
                 Check out the current best sellers!
               </h2>
               <div
@@ -83,7 +84,9 @@ const Home = () => {
                     <img
                       src={card.image}
                       alt={card.title}
-
+                      style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '4px' }}
+                    />
+                    <h3 style={{ fontSize: '1.2rem', margin: '10px 0', color: '#333' }}>{card.title}</h3>
                     <button
                       onClick={() => handleExplore(card.genre)}
                       style={{
@@ -106,7 +109,9 @@ const Home = () => {
           )}
         </>
       ) : (
-
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <h1 style={{ fontSize: '2.5rem', color: '#333' }}>You are not logged in!</h1>
+          <p style={{ fontSize: '1.2rem', color: '#555' }}>Please login to continue</p>
         </div>
       )}
     </div>

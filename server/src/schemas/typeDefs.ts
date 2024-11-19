@@ -46,6 +46,7 @@ type Mutation {
   addUser(input: AddUserInput!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
   addBook(input: AddBookInput!): User!
+  removeBook(cover_id: Int!): User!
 }
 `;
 

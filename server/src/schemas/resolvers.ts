@@ -113,6 +113,27 @@ const resolvers = {
   
       return user; // Return the updated user object
     },
+    emoveBook: async (_parent: any, { cover_id }: { cover_id: number }, context: any) => {
+      // Ensure the user is authenticated
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to perform this action.');
+      }
+
+      // Find the user by their ID from the context (the decoded JWT payload)
+      const user = await User.findById(context.user._id);
+      if (!user) {
+        throw new Error('User not found.');
+      }
+
+      // Remove the book with the given cover_id from the user's books array
+      user.books = user.books.filter((book: any) => book.cover_id !== cover_id);
+
+      // Save the updated user object
+      await user.save();
+
+      // Return the updated user object with the updated books array
+      return user;
+    },
   },
 };
 
