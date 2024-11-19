@@ -41,20 +41,26 @@ const Login = () => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
-          <div className="card-body">
+      <main
+        className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b"
+        style={{
+          background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Gradient using hex codes
+        }}
+      >
+        <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+          <h4 className="text-2xl font-bold text-center mb-6">Login</h4>
+          <div>
             {data ? (
-              <p>
+              <p className="text-center">
                 Success! You may now head{' '}
-                <Link to="/">back to the homepage.</Link>
+                <Link to="/" className="text-blue-500 underline">
+                  back to the homepage.
+                </Link>
               </p>
             ) : (
-              <form onSubmit={handleFormSubmit}>
+              <form onSubmit={handleFormSubmit} className="space-y-4">
                 <input
-                  className="form-input"
+                  className="w-full border rounded-lg p-2"
                   placeholder="Your email"
                   name="email"
                   type="email"
@@ -62,38 +68,38 @@ const Login = () => {
                   onChange={handleChange}
                 />
                 <input
-                  className="form-input"
+                  className="w-full border rounded-lg p-2"
                   placeholder="******"
                   name="password"
                   type="password"
                   value={formState.password}
                   onChange={handleChange}
                 />
-                <button
-                  className="btn btn-block btn-info"
-                  style={{ cursor: 'pointer' }}
-                  type="submit"
-                >
-                  Submit
-                </button>
+              <button
+                className="w-full text-white p-2 rounded-lg"
+                style={{
+                  backgroundColor: '#44345D', // Background color in hex
+                }}
+              >
+                Submit
+              </button>
               </form>
             )}
-
+  
             {error && (
-              <div className="my-3 p-3 bg-danger text-white">
-                {`User does not exist. Please try again or create new user.`}
+              <div className="mt-4 p-3 bg-red-600 text-white text-center rounded-lg">
+                User does not exist. Please try again or create a new user.
               </div>
             )}
           </div>
         </div>
-      </div>
-      <div>
-        <button>
-        <Link to="/createUser">Create New User</Link>
-        </button>
-      </div>
-    </main>
-  );
-};
-
-export default Login;
+        <div className="mt-6">
+          <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+            <Link to="/createUser">Create New User</Link>
+          </button>
+        </div>
+      </main>
+    );
+  };
+  
+  export default Login;
