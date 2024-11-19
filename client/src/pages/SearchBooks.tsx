@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import Book from '../components/BookCard';
 import BookCard from '../components/BookCard';
+import { useMutation } from '@apollo/client';
+import { ADD_BOOK } from '../utils/mutations';
+
+const [addBook] = useMutation(ADD_BOOK);
+
 // Define the structure of each book object
 interface Book {
   cover_id: number;
@@ -15,14 +20,21 @@ const SearchBooks = () => {
   const [loading, setLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState<string | null>(null);
 
-  const handleAddToLibrary = (book: Book) => {
-    const savedBooks: Book[] = JSON.parse(localStorage.getItem('myLibrary') || '[]');
-    if (!savedBooks.some(savedBook => savedBook.cover_id === book.cover_id)) {
-      savedBooks.push(book);
-      localStorage.setItem('myLibrary', JSON.stringify(savedBooks));
+  const handleAddToLibrary = async (book: any) => {
+    try {
+      await addBook({
+        variables: {
+          input: {
+            title: book.title,
+            author: book.author_name.join(', '),
+            genre: book.genres ? book.genres[0] : 'Unknown',
+          },
+        },
+      });
       alert(`${book.title} has been added to your library!`);
-    } else {
-      alert(`${book.title} is already in your library.`);
+    } catch (error) {
+      console.error('Error adding book to library:', error);
+      alert('Failed to add book to library.');
     }
   };
   // Function to handle form submission and fetch books from Open Library API

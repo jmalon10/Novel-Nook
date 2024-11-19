@@ -61,5 +61,3 @@ const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => 
 };
 
 export default BooksList;
-
-

@@ -19,12 +19,6 @@ interface UserArgs {
   username: string;
 }
 
-interface AddBookArgs {
-  title: string;
-  author: string;
-  genre: string;
-}
-
 interface GetBooksArgs {
   title?: string;
   author?: string;
@@ -102,10 +96,22 @@ const resolvers = {
       };
     },
     
-    addBook: async (_parent: any, { title, author, genre }: AddBookArgs) => {
-      // Create a new book entry in the database
-      const newBook = await Book.create({ title, author, genre });
-      return newBook;
+    addBook: async (_parent: any, { input }: { input: { title: string; author: string; genre: string } }, context: any) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to perform this action.');
+      }
+  
+      const user = await User.findById(context.user._id);
+  
+      if (!user) {
+        throw new Error('User not found.');
+      }
+  
+      // Add the new book to the user's library
+      user.books.push(input);
+      await user.save();
+  
+      return user; // Return the updated user object
     },
   },
 };
