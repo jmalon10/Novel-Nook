@@ -21,21 +21,12 @@ const Home = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex flex-col"
-      style={{
-        background: "linear-gradient(to bottom, #856F8C, #44345D)", // Gradient background
-        color: 'white', // Ensures text visibility on dark background
-        fontFamily: 'Arial, sans-serif',
-        padding: '20px',
-      }}
-    >
+
       {loginCheck ? (
         <>
           {!selectedGenre ? (
             <div>
-              <header className="text-center mb-8">
-                <h1 className="text-4xl font-bold mb-4">
+
                   Welcome to the Best Sellers Portal!
                 </h1>
                 <button
@@ -52,14 +43,7 @@ const Home = () => {
                   Logout
                 </button>
               </header>
-              <h2
-                style={{
-                  textAlign: 'center',
-                  color: '#ddd',
-                  marginBottom: '30px',
-                  fontSize: '1.5rem',
-                }}
-              >
+
                 Check out the current best sellers!
               </h2>
               <div
@@ -99,22 +83,7 @@ const Home = () => {
                     <img
                       src={card.image}
                       alt={card.title}
-                      style={{
-                        width: '100%',
-                        height: '150px',
-                        objectFit: 'cover',
-                        borderRadius: '4px',
-                      }}
-                    />
-                    <h3
-                      style={{
-                        fontSize: '1.2rem',
-                        margin: '10px 0',
-                        color: '#333',
-                      }}
-                    >
-                      {card.title}
-                    </h3>
+
                     <button
                       onClick={() => handleExplore(card.genre)}
                       style={{
@@ -137,13 +106,7 @@ const Home = () => {
           )}
         </>
       ) : (
-        <div className="flex flex-1 items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold">You are not logged in!</h1>
-            <p className="text-3xl font-bold underline mt-4">
-              Please login to continue
-            </p>
-          </div>
+
         </div>
       )}
     </div>
@@ -151,3 +114,4 @@ const Home = () => {
 };
 
 export default Home;
+
