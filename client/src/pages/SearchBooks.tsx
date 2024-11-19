@@ -59,7 +59,7 @@ const SearchBooks = () => {
 
   return (
     <section className="min-h-screen bg-gray-100 py-10 px-4">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books</h1>
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books 🔍</h1>
       <form
         onSubmit={handleFormSubmit}
         className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto"
