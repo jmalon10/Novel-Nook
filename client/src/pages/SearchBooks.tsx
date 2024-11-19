@@ -66,6 +66,7 @@ const SearchBooks = () => {
       >
         <input
           type="text"
+      
           placeholder="Search by title"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
@@ -100,7 +101,7 @@ const SearchBooks = () => {
           !loading &&
           !error && (
             <p className="text-center text-lg font-medium text-gray-600">
-              No books found. Try searching for something else.
+              No books found ☹️. Try searching for something else.
             </p>
           )
         )}
