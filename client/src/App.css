@@ -1,46 +1,72 @@
 /* Apply the gradient to the page */
 body {
-  background: linear-gradient(to bottom, #856F8C, #44345D);
-  font-family: 'Cinzel', serif; /* Optional: Apply font for the whole page */
+  background: linear-gradient(to bottom, #5d5023, #9E8B6E); /* Gradient from a rich brown to dark beige */
+  font-family: 'Cinzel', serif; /* Fancy font for an elegant and sophisticated look */
+  margin: 0;
+  padding: 0;
+  color: #fff; /* Default text color to white for contrast */
 }
 
 /* Title (h1) styles: Centered, larger, and fancy */
 h1 {
-  font-size: 4rem; /* Makes the title larger */
-  font-family: 'Cinzel', serif; /* Apply a fancy, elegant font */
+  font-size: 4rem; /* Makes the title large */
+  font-family: 'Cinzel', serif; /* Elegant serif font */
   text-align: center; /* Centers the title */
-  color: #FF69B4; /* A soft pink for the title color */
-  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow to make the text pop */
-  letter-spacing: 2px; /* Adds spacing between letters for elegance */
-  margin: 0; /* Remove default margin */
-  padding: 20px; /* Optional padding around the title */
-}
-
-/* Button with pastel pink background */
-.novel-nook-btn {
-  background-color: #FFB6C1; /* Pastel pink */
-  color: white; /* Text color */
-  padding: 12px 24px; /* Padding for the button */
-  font-size: 1.2rem; /* Font size for button text */
-  border: none; /* Remove default border */
-  border-radius: 8px; /* Rounded corners */
-  cursor: pointer; /* Show pointer cursor on hover */
-  transition: all 0.3s ease; /* Smooth transition on hover */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for effect */
-}
-
-.novel-nook-btn:hover {
-  background-color: #FF69B4; /* Slightly darker pink on hover */
-  transform: translateY(-2px); /* Slight "pop" effect on hover */
-}
-
-.novel-nook-btn:focus {
-  outline: none; /* Remove outline on focus */
-}
-
-.novel-nook-btn:active {
-  background-color: #FF1493; /* Darker pink when clicked */
-  transform: translateY(0); /* Remove "pop" effect when clicked */
-}
-
+  color: #F5D3A5; /* A soft, warm gold to complement the dark beige background */
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Stronger shadow for more contrast */
+  letter-spacing: 2px; /* Adds spacing for a more elegant feel */
+  margin: 40px 0; /* Adds spacing around the title */
+  padding: 0;
+  line-height: 1.2; /* Ensures the title is spaced nicely */
   
+  /* Initial off-screen position */
+  transform: translateX(-100%);
+  animation: slideIn 1s ease-out forwards; /* Apply slide-in animation */
+}
+
+/* Keyframes for slide-in animation */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%); /* Start off-screen to the left */
+  }
+  100% {
+    transform: translateX(0); /* End at the original position */
+  }
+}
+
+/* Button with a professional brown background */
+.novel-nook-btn {
+  background-color: #6F4F28; /* Rich brown for the button background */
+  color: white; /* White text for contrast */
+  padding: 12px 30px; /* Slightly larger padding for a more substantial button */
+  font-size: 1.2rem; /* A refined font size for the button */
+  border: none; /* Removes default border */
+  border-radius: 12px; /* Rounded corners for a soft, elegant look */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition for hover and active states */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Deeper shadow for depth */
+}
+
+/* Hover effect for the button */
+.novel-nook-btn:hover {
+  background-color: #8B5A2B; /* Lighter brown on hover */
+  transform: translateY(-4px); /* Slight "pop" effect on hover for modern touch */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* More shadow for depth on hover */
+}
+
+/* Focus effect: Remove outline but keep button effect */
+.novel-nook-btn:focus {
+  outline: none; /* Remove the default outline */
+  box-shadow: 0 0 0 3px rgba(180, 140, 100, 0.5); /* Add a subtle beige glow for focus state */
+}
+
+/* Active effect: Make the button feel pressed */
+.novel-nook-btn:active {
+  background-color: #4E3629; /* Darker brown when clicked */
+  transform: translateY(0); /* Remove "pop" effect when clicked */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow effect when clicked */
+}
+
+
+
+
