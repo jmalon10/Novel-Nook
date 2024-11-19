@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import BookCard from './BookCard'; // Reusing the existing BookCard component
+import { ADD_BOOK } from '../utils/mutations';
+import { useMutation } from '@apollo/client';
 
 interface Book {
   cover_id?: number; // Placeholder since NYT doesn't provide this
@@ -12,6 +14,13 @@ interface Book {
 const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [addBook] = useMutation(ADD_BOOK, {
+    context: {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('id_token')}`,
+      },
+    },
+  });
 
   const API_KEY = 'vbAezUGAi0Z5BncE7rf3OPxfUVpMUP9k';
   const NYT_API_URL = `https://api.nytimes.com/svc/books/v3/lists/current/${genre}.json?api-key=${API_KEY}`;
@@ -40,9 +49,22 @@ const BooksList = ({ genre, goBack }: { genre: string; goBack: () => void }) => 
     fetchBooks();
   }, [genre]);
 
-  const handleAddToLibrary = (book: Book) => {
-    console.log(`Added "${book.title}" to the library`);
-    // Logic to save the book to the user's library (e.g., API call, state management)
+  const handleAddToLibrary = async (book: any) => {
+    try {
+      await addBook({
+        variables: {
+          input: {
+            title: book.title,
+            author: book.author_name.join(', '),
+            genre: book.genres ? book.genres[0] : 'Unknown',
+          },
+        },
+      });
+      alert(`${book.title} has been added to your library!`);
+    } catch (error) {
+      console.error('Error adding book to library:', error);
+      alert('Failed to add book to library.');
+    }
   };
 
   if (error) return <div>Error: {error}</div>;

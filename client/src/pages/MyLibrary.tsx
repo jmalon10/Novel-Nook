@@ -11,16 +11,19 @@ interface Book {
   genres?: string[];
 }
 
+
 const MyLibrary: React.FC = () => {
-  const { loading, error, data } = useQuery(GET_USER_BOOKS); // Fetch books from server
+  const currentUser = localStorage.getItem('username');
+  console.log("User data from local storage: ", currentUser)
+  const { loading, data } = useQuery(GET_USER_BOOKS); // Fetch books from server
   const [removeBook] = useMutation(REMOVE_BOOK); // Mutation for removing a book from library
   
   const [libraryBooks, setLibraryBooks] = useState<Book[]>([]);
-
+  const books = data || [];
   useEffect(() => {
-    // Once data is fetched from the server, update the local state
-    if (data) {
-      setLibraryBooks(data.me.books); // Assuming 'me' is the logged-in user
+    if (books) {
+      console.log("Data from server: ", data);
+      setLibraryBooks(books);
     }
   }, [data]);
 
@@ -40,13 +43,12 @@ const MyLibrary: React.FC = () => {
     }
   };
 
-  if (loading) return <p>Loading your library...</p>;
-  if (error) return <p>Error fetching your library.</p>;
 
+  if (loading) return <p>Loading your library...</p>;
   return (
     <section>
       <h1>My Library</h1>
-      {libraryBooks.length > 0 ? (
+      {libraryBooks?.length > 0 ? (
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           {libraryBooks.map((book) => (
             <div 

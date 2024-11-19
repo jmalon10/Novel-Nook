@@ -50,4 +50,28 @@ export class AuthenticationError extends GraphQLError {
   }
 };
 
-
+export const authMiddleware = (req: any) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1]; // Extract token from "Bearer <token>"
+  console.log('Token:', token);
+  if (!token) {
+    console.error('No token found');
+    return { user: null };
+  }
+  try {
+    if (!process.env.JWT_SECRET_KEY) {
+      throw new Error('JWT_SECRET is not defined');
+    }
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY) as jwt.JwtPayload;
+    console.log('Decoded:', decoded);
+    return { user: decoded };
+  } catch (error) {
+    if (error instanceof jwt.TokenExpiredError) {
+      console.error('Token has expired:', error.expiredAt);
+      return { user: null, error: 'TokenExpired' }; // Returning a specific error for expired tokens
+    } else {
+      console.error('Invalid token:', error);
+      return { user: null, error: 'InvalidToken' }; // General error for invalid tokens
+    }
+  }
+};

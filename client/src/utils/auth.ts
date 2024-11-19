@@ -37,6 +37,7 @@ class AuthService {
 
   login(idToken: string) {
     localStorage.setItem('id_token', idToken);
+    localStorage.setItem('username', jwtDecode<ExtendedJwt>(idToken).data.username);
     window.location.assign('/');
   }
 

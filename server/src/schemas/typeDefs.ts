@@ -26,12 +26,12 @@ type AuthPayload {
   user: User!
 }
 
+
 # Queries for retrieving data
 type Query {
   users: [User!]!
   user(username: String!): User
-  me: User
-  getBooks(title: String, author: String, genre: String): [Book!]!
+  getUserBooks: [Book!]!
 }
 
 # Input type for user registration

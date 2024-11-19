@@ -1,4 +1,4 @@
-import { User, Book } from '../models/index.js';
+import { User } from '../models/index.js';
 import { signToken, AuthenticationError } from '../utils/auth.js'; 
 
 // Define types for the arguments
@@ -19,11 +19,6 @@ interface UserArgs {
   username: string;
 }
 
-interface GetBooksArgs {
-  title?: string;
-  author?: string;
-  genre?: string;
-}
 
 const resolvers = {
   Query: {
@@ -31,30 +26,24 @@ const resolvers = {
       return User.find()
     },
     user: async (_parent: any, { username }: UserArgs) => {
+      console.log(`USERNAME: ${username}`);
       return User.findOne({ username })
     },
     
     // Query to get the authenticated user's information
     // The 'me' query relies on the context to check if the user is authenticated
-    me: async (_parent: any, _args: any, context: any) => {
-      // If the user is authenticated, find and return the user's information along with their thoughts
-      if (context.user) {
-        return User.findOne({ _id: context.user._id })
+    getUserBooks: async (_parent: any, {username}: any, context: any) => {
+      if (!context.user) {
+        throw new AuthenticationError('You must be logged in to perform this action.');
       }
-      // If the user is not authenticated, throw an AuthenticationError
-      throw new AuthenticationError('Could not authenticate user.');
-    },
-    // books: async () => {
-    //   return Book.find() // Query to retrieve all books
-    // }
-    getBooks: async (_parent: any, { title, author, genre }: GetBooksArgs) => {
-      // Build a filter object based on the provided arguments
-      const filter: any = {};
-      if (title) filter.title = { $regex: title, $options: 'i' }; // Case-insensitive search
-      if (author) filter.author = { $regex: author, $options: 'i' };
-      if (genre) filter.genre = { $regex: genre, $options: 'i' };
-
-      return Book.find(filter);
+     console.log(username);
+      const user = await User.findById(context.user.data._id);
+    
+      if (!user) {
+        throw new Error('User not found.');
+      }
+      console.log(user.books);
+      return user.books; // Return the books array from the user document
     },
   },
   Mutation: {
@@ -100,8 +89,8 @@ const resolvers = {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to perform this action.');
       }
-  
-      const user = await User.findById(context.user._id);
+      console.log(`CONTEXT USER: ${context.user.data._id}`);
+      const user = await User.findById(context.user.data._id);
   
       if (!user) {
         throw new Error('User not found.');
@@ -115,7 +104,7 @@ const resolvers = {
     },
     removeBook: async (_parent: any, { cover_id }: { cover_id: number }, context: any) => {
       // Ensure the user is authenticated
-      if (!context.user) {
+      if (!context) {
         throw new AuthenticationError('You must be logged in to perform this action.');
       }
 
