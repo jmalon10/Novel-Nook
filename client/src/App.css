@@ -1,0 +1,46 @@
+/* Apply the gradient to the page */
+body {
+  background: linear-gradient(to bottom, #856F8C, #44345D);
+  font-family: 'Cinzel', serif; /* Optional: Apply font for the whole page */
+}
+
+/* Title (h1) styles: Centered, larger, and fancy */
+h1 {
+  font-size: 4rem; /* Makes the title larger */
+  font-family: 'Cinzel', serif; /* Apply a fancy, elegant font */
+  text-align: center; /* Centers the title */
+  color: #FF69B4; /* A soft pink for the title color */
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Adds a subtle shadow to make the text pop */
+  letter-spacing: 2px; /* Adds spacing between letters for elegance */
+  margin: 0; /* Remove default margin */
+  padding: 20px; /* Optional padding around the title */
+}
+
+/* Button with pastel pink background */
+.novel-nook-btn {
+  background-color: #FFB6C1; /* Pastel pink */
+  color: white; /* Text color */
+  padding: 12px 24px; /* Padding for the button */
+  font-size: 1.2rem; /* Font size for button text */
+  border: none; /* Remove default border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Show pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for effect */
+}
+
+.novel-nook-btn:hover {
+  background-color: #FF69B4; /* Slightly darker pink on hover */
+  transform: translateY(-2px); /* Slight "pop" effect on hover */
+}
+
+.novel-nook-btn:focus {
+  outline: none; /* Remove outline on focus */
+}
+
+.novel-nook-btn:active {
+  background-color: #FF1493; /* Darker pink when clicked */
+  transform: translateY(0); /* Remove "pop" effect when clicked */
+}
+
+  
