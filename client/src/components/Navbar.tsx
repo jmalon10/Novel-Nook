@@ -18,7 +18,7 @@ const Navbar = () => {
   return (
     <header className="display-flex justify-space-between align-center p-2 mint-green">
       {/* Apply the styles directly to the <h1> element */}
-      <h1 style={styles.title}>Welcome Novel-Nook!</h1>
+      <h1 style={styles.title}>Welcome to Novel-Nook!</h1>
       <div className="button-group">
         {/* Login button */}
         {!loginCheck ? (
