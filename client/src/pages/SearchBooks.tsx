@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Book from '../components/BookCard';
 import BookCard from '../components/BookCard';
-// Define the structure of each book object
+
 interface Book {
   cover_id: number;
   title: string;
@@ -9,9 +8,10 @@ interface Book {
   cover_url?: string;
   genres?: string[];
 }
+
 const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState(''); // State for search input
-  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
+  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results
   const [loading, setLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState<string | null>(null);
 
@@ -25,7 +25,7 @@ const SearchBooks = () => {
       alert(`${book.title} is already in your library.`);
     }
   };
-  // Function to handle form submission and fetch books from Open Library API
+
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!searchInput.trim()) {
@@ -38,54 +38,71 @@ const SearchBooks = () => {
         `https://openlibrary.org/search.json?title=${encodeURIComponent(searchInput.trim())}&limit=10`
       );
       if (!response.ok) {
-        throw new Error("Failed to fetch books from Open Library.");
+        throw new Error('Failed to fetch books from Open Library.');
       }
       const data = await response.json();
-      // Map through the results and format them as needed
       const books = data.docs.map((book: any) => ({
         title: book.title,
-        author_name: book.author_name || ["Unknown Author"],
+        author_name: book.author_name || ['Unknown Author'],
         cover_id: book.cover_i,
         cover_url: book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` : null,
-        genres: book.subject ? book.subject.slice(0, 5) : []
+        genres: book.subject ? book.subject.slice(0, 5) : [],
       }));
       setSearchedBooks(books);
     } catch (error) {
-      console.error("Error fetching books:", error);
-      setError("An error occurred while fetching books. Please try again.");
+      console.error('Error fetching books:', error);
+      setError('An error occurred while fetching books. Please try again.');
     } finally {
       setLoading(false); // Stop loading
     }
   };
-  // Render the form and search results
+
   return (
-    <section>
-      <h1>Search Books</h1>
-      <form onSubmit={handleFormSubmit}>
+    <section className="min-h-screen bg-gray-100 py-10 px-4">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books</h1>
+      <form
+        onSubmit={handleFormSubmit}
+        className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto"
+      >
         <input
           type="text"
           placeholder="Search by title"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        <button type="submit">Search</button>
+        <button
+          type="submit"
+          className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition duration-200"
+        >
+          Search
+        </button>
       </form>
-      {/* Show loading message */}
-      {loading && <p>Loading...</p>}
-      {/* Show error message */}
-      {error && <p className="error-message">{error}</p>}
-       {/* Display the search results using BookCard */}
-       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+
+      {loading && (
+        <p className="text-center text-lg font-medium text-gray-600">Loading...</p>
+      )}
+
+      {error && (
+        <p className="text-center text-lg font-medium text-red-600">{error}</p>
+      )}
+
+      <div className="flex flex-wrap justify-center gap-6">
         {searchedBooks.length > 0 && !loading ? (
           searchedBooks.map((book) => (
-            <BookCard 
-              key={book.cover_id} 
-              book={book} 
+            <BookCard
+              key={book.cover_id}
+              book={book}
               onAddToLibrary={handleAddToLibrary}
             />
           ))
         ) : (
-          !loading && !error && <p>No books found. Try searching for something else.</p>
+          !loading &&
+          !error && (
+            <p className="text-center text-lg font-medium text-gray-600">
+              No books found. Try searching for something else.
+            </p>
+          )
         )}
       </div>
     </section>

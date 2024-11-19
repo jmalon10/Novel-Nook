@@ -93,7 +93,7 @@ const Login = () => {
             )}
           </div>
         </div>
-        <div className="mt-6">
+       <div className="mt-6">
   <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 shadow-[0_0_15px_4px_rgba(255,255,255,1)] animate-pulse-glow transition duration-300">
     <Link to="/createUser">Create New User</Link>
   </button>
