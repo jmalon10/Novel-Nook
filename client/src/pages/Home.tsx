@@ -41,7 +41,7 @@ const Home = () => {
               <h1 className="text-4xl font-bold">Welcome to the Best Sellers Portal!</h1>
               <button
                 onClick={handleLogout}
-                className="px-6 py-3 bg-red-600 text-white rounded-lg shadow hover:bg-red-700 transition duration-300"
+                className="px-6 py-3 bg-red-700 text-white rounded-lg shadow hover:bg-red-700 transition duration-300"
               >
                 Logout
               </button>
@@ -53,12 +53,9 @@ const Home = () => {
     { title: "Young Adult", genre: "young-adult", image: "https://m.media-amazon.com/images/I/41RDgCHpGTL._SY445_SX342_.jpg" },
     { title: "Crime", genre: "crime-and-punishment", image: "https://m.media-amazon.com/images/I/41x6HtLdEhL._SY445_SX342_QL70_FMwebp_.jpg" },
     { title: "Relationships", genre: "relationships", image: "https://m.media-amazon.com/images/I/81xXA1fRHbL._SX522_.jpg" },
-    { title: "Fantasy", genre: "fantasy", image: "https://m.media-amazon.com/images/I/81FQ9UXmRQL._SX522_.jpg" },
-    { title: "Science Fiction", genre: "science-fiction", image: "https://m.media-amazon.com/images/I/41wWIbZxtzL._SY445_SX342_.jpg" },
-    {
-      title: "Series Books",
-      genre: "series-books",
-      image: "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg", // Harry Potter book cover
+    { title: "Family", genre: "family", image: "https://m.media-amazon.com/images/I/51JHL6vhssL._SX342_SY445_.jpg" },
+    { title: "Travel", genre: "travel", image: "https://m.media-amazon.com/images/I/51DZ9FcZqFS._SY445_SX342_.jpg" },
+    {title: "Series Books", genre: "series-books",image: "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg", // Harry Potter book cover
     },
   ].map((card, index) => (
     <div
