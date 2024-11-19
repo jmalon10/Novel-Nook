@@ -50,12 +50,12 @@ const Home = () => {
   className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
 >
   {[
-    { title: "Young Adult", genre: "young-adult", image: "https://m.media-amazon.com/images/I/41RDgCHpGTL._SY445_SX342_.jpg" },
-    { title: "Crime", genre: "crime-and-punishment", image: "https://m.media-amazon.com/images/I/41x6HtLdEhL._SY445_SX342_QL70_FMwebp_.jpg" },
-    { title: "Relationships", genre: "relationships", image: "https://m.media-amazon.com/images/I/81xXA1fRHbL._SX522_.jpg" },
-    { title: "Family", genre: "family", image: "https://m.media-amazon.com/images/I/51JHL6vhssL._SX342_SY445_.jpg" },
-    { title: "Travel", genre: "travel", image: "https://m.media-amazon.com/images/I/51DZ9FcZqFS._SY445_SX342_.jpg" },
-    {title: "Series Books", genre: "series-books",image: "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg", // Harry Potter book cover
+    { title: "Young Adult", genre: "Young-Adult", image: "https://m.media-amazon.com/images/I/41RDgCHpGTL._SY445_SX342_.jpg" },
+    { title: "Crime", genre: "Crime-and-Punishment", image: "https://m.media-amazon.com/images/I/41x6HtLdEhL._SY445_SX342_QL70_FMwebp_.jpg" },
+    { title: "Relationships", genre: "Relationships", image: "https://m.media-amazon.com/images/I/81xXA1fRHbL._SX522_.jpg" },
+    { title: "Family", genre: "Family", image: "https://m.media-amazon.com/images/I/51JHL6vhssL._SX342_SY445_.jpg" },
+    { title: "Travel", genre: "Travel", image: "https://m.media-amazon.com/images/I/51DZ9FcZqFS._SY445_SX342_.jpg" },
+    {title: "Series Books", genre: "Series-Books",image: "https://m.media-amazon.com/images/I/81YOuOGFCJL.jpg", // Harry Potter book cover
     },
   ].map((card, index) => (
     <div
