@@ -3,6 +3,7 @@ import Book from '../components/BookCard';
 import BookCard from '../components/BookCard';
 import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from '../utils/mutations';
+import { GET_USER_BOOKS } from '../utils/queries';
 
 
 
@@ -14,6 +15,9 @@ interface Book {
   cover_url?: string;
   genres?: string[];
 }
+export interface UserBooksQuery {
+  getUserBooks: Book[];
+}
 const SearchBooks = () => {
   const [searchInput, setSearchInput] = useState(''); // State for search input
   const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
@@ -21,8 +25,11 @@ const SearchBooks = () => {
   const [error, setError] = useState<string | null>(null);
   const [addBook] = useMutation(ADD_BOOK);
   const handleAddToLibrary = async (book: any) => {
-    console.log('Adding book to library:---------------------------------------------------', book);
-    try {
+      try {
+        const coverUrl = book.cover_id 
+        ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` 
+        : null;
+  
       await addBook({
         variables: {
           input: {
@@ -30,11 +37,19 @@ const SearchBooks = () => {
             author: book.author_name.join(', '),
             genre: book.genres ? book.genres[0] : 'Unknown',
             cover_id: book.cover_id,
-            cover_url: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
+            cover_url: coverUrl,
           },
         },
+        update: (cache, { data: { addBook } }) => {
+          const existingBooks = cache.readQuery<UserBooksQuery>({ query: GET_USER_BOOKS });
+          cache.writeQuery({
+            query: GET_USER_BOOKS,
+            data: {
+              getUserBooks: [...(existingBooks?.getUserBooks || []), addBook],
+            },
+          });
+        },
       });
-      console.log('Adding book to library 2 :---------------------------------------------------', book);
       alert(`${book.title} has been added to your library!`);
     } catch (error) {
       console.error('Error adding book to library:', error);
@@ -62,8 +77,12 @@ const SearchBooks = () => {
         title: book.title,
         author_name: book.author_name || ["Unknown Author"],
         cover_id: book.cover_i,
-        cover_url: book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` : null,
-        genres: book.subject ? book.subject.slice(0, 5) : []
+        cover_url: book.cover_i 
+          ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+          : book.isbn 
+            ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` 
+            : null,
+        genres: book.subject ? book.subject.slice(0, 5) : [],
       }));
       setSearchedBooks(books);
     } catch (error) {

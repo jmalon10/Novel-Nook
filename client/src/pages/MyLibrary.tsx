@@ -6,9 +6,9 @@ import { REMOVE_BOOK } from '../utils/mutations'; // Mutation to remove a book f
 interface Book {
   cover_id: number;
   title: string;
-  author_name: string[];
+  author: string;
   cover_url?: string;
-  genres?: string[];
+  genre?: string;
 }
 
 
@@ -21,11 +21,11 @@ const MyLibrary: React.FC = () => {
   const [libraryBooks, setLibraryBooks] = useState<Book[]>([]);
   const books = data || [];
   useEffect(() => {
-    if (books) {
-      console.log("Data from server: ", data);
-      setLibraryBooks(books);
+    if (books && books.getUserBooks) {
+      console.log("Books from server: ", data.getUserBooks);
+      setLibraryBooks(data.getUserBooks);
     }
-  }, [data]);
+  }, [books]);
 
   // Function to remove a book from the library both locally and on the server
   const handleRemoveFromLibrary = async (cover_id: number) => {
@@ -61,7 +61,7 @@ const MyLibrary: React.FC = () => {
               }}
             >
               <h2>{book.title}</h2>
-              <p>{book.author_name ? book.author_name.join(", ") : "Unknown Author"}</p>
+              <p>{book.author ? book.author : "Unknown Author"}</p>
               {book.cover_url && (
                 <img 
                   src={book.cover_url} 
@@ -69,7 +69,7 @@ const MyLibrary: React.FC = () => {
                   style={{ width: '100%', height: 'auto' }} 
                 />
               )}
-              <p>Genres: {book.genres ? book.genres.join(", ") : "No genres available"}</p>
+              <p>Genre: {book.genre ? book.genre : "No genres available"}</p>
               <button 
                 onClick={() => handleRemoveFromLibrary(book.cover_id)}
                 style={{
