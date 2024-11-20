@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER_BOOKS } from '../utils/queries'; // Make sure this query is defined
 import { REMOVE_BOOK } from '../utils/mutations'; // Mutation to remove a book from the library
+import BookCard from '../components/BookCard';
 
 interface Book {
   cover_id: number;
@@ -52,32 +53,17 @@ const MyLibrary: React.FC = () => {
       {libraryBooks?.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {libraryBooks.map((book) => (
-            <div
-              key={book.cover_id}
-              className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
-            >
-              <h2 className="text-lg font-bold mb-2">{book.title}</h2>
-              <p className="text-gray-600 mb-2">
-                {book.author ? book.author : "Unknown Author"}
-              </p>
-              {book.cover_url && (
-                <img
-                  src={book.cover_url}
-                  alt={`${book.title} cover`}
-                  className="w-full h-40 object-cover rounded-lg mb-4"
-                />
-              )}
-              <p className="text-sm text-gray-500 mb-4">
-                Genre: {book.genre ? book.genre : "No genres available"}
-              </p>
-              <button
-                onClick={() => handleRemoveFromLibrary(book.cover_id)}
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300"
-              >
-                Remove from Library
-              </button>
-            </div>
-          ))}
+  <BookCard
+    key={book.cover_id}
+    coverId={book.cover_id}
+    title={book.title}
+    author={book.author}
+    coverUrl={book.cover_url}
+    genres={[book.genre || 'Unknown']}
+    onActionClick={() => handleRemoveFromLibrary(book.cover_id)}
+    actionLabel="Remove from Library"
+  />
+))}
         </div>
       ) : (
         <p className="text-center text-lg text-white">
