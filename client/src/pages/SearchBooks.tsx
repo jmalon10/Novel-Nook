@@ -3,7 +3,7 @@ import Book from '../components/BookCard';
 import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from '../utils/mutations';
 import { GET_USER_BOOKS } from '../utils/queries';
-
+import BookCard from '../components/BookCard';
 
 
 // Define the structure of each book object
@@ -130,37 +130,19 @@ const SearchBooks = () => {
   {/* Display the search results using BookCard */}
       {searchedBooks.length > 0 && !loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          {searchedBooks.map((book) => (
-            <div
-              key={book.cover_id}
-              className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
-            >
-              {book.cover_url ? (
-                <img
-                  src={book.cover_url}
-                  alt={`${book.title} cover`}
-                  className="w-full h-40 object-cover rounded-t-lg mb-4"
-                />
-              ) : (
-                <div className="w-full h-40 bg-gray-200 rounded-t-lg mb-4 flex items-center justify-center">
-                  <p className="text-gray-500">No Cover Available</p>
-                </div>
-              )}
-              <h3 className="text-lg font-bold mb-2">{book.title}</h3>
-              <p className="text-gray-600 mb-2">
-                {book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
-              </p>
-              <p className="text-sm text-gray-500 mb-4">
-                Genres: {book.genres?.join(', ') || 'Not Specified'}
-              </p>
-              <button
-                onClick={() => handleAddToLibrary(book)}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
-              >
-                Add to Library
-              </button>
-            </div>
-          ))}
+{searchedBooks.map((book) => (
+  <BookCard
+    key={book.cover_id}
+    coverId={book.cover_id}
+    title={book.title}
+    author={book.author_name.join(', ')}
+    coverUrl={book.cover_url}
+    genres={book.genres}
+    onActionClick={() => handleAddToLibrary(book)}
+    actionLabel="Add to Library"
+  />
+))}
+
         </div>
       ) : (
         !loading &&
