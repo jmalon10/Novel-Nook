@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <header className="flex flex-col items-center p-4 bg-gradient-to-b from-mint-green to-gray-200">
-      <h1 className="text-3xl font-bold text-center mb-4">Welcome to Novel-Nook!</h1>
+      <h1 className="text-5xl font-bold mb-4">Welcome to Novel-Nook!</h1>
       
       <div className="flex flex-wrap justify-center items-center gap-6">
         {/* Login button */}
@@ -47,7 +47,7 @@ const Navbar = () => {
 
             <button className="bg-[#da6aa2] hover:bg-[#c6518c] text-white py-3 px-4 rounded-lg shadow-md transition duration-300">
               <Link to="/library" className="no-underline">
-                MyLibrary
+                My Library
               </Link>
             </button>
           </>

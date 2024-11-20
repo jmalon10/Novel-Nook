@@ -38,7 +38,7 @@ const Home = () => {
         <>
           {!selectedGenre ? (
             <div className="text-center space-y-8">
-              <h1 className="text-4xl font-bold">Welcome to the Best Sellers Portal!</h1>
+              <h2 className="text-4xl font-bold">Welcome to the Best Sellers Portal!</h2>
               <button
                 onClick={handleLogout}
                 className="px-6 py-3 bg-red-700 text-white rounded-lg shadow hover:bg-red-700 transition duration-300"
@@ -85,7 +85,7 @@ const Home = () => {
         </>
       ) : (
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Please log in to explore the Best Sellers Portal!</h1>
+          <h2 className="text-4xl font-bold">Please log in to explore the Best Sellers Portal!</h2>
         </div>
       )}
     </div>
