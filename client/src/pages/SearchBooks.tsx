@@ -130,9 +130,6 @@ const SearchBooks = () => {
   {/* Display the search results using BookCard */}
       {searchedBooks.length > 0 && !loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          import BookCard from '../components/BookCard';
-
-// Inside the `searchedBooks.map` block:
 {searchedBooks.map((book) => (
   <BookCard
     key={book.cover_id}
