@@ -46,43 +46,42 @@ const MyLibrary: React.FC = () => {
 
   if (loading) return <p>Loading your library...</p>;
   return (
-    <section>
-      <h1>My Library</h1>
+    <section className="py-10 px-4">
+      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">My Library</h1>
       {libraryBooks?.length > 0 ? (
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {libraryBooks.map((book) => (
-            <div 
-              key={book.cover_id} 
-              style={{ 
-                border: '1px solid #ddd', 
-                padding: '10px', 
-                margin: '10px', 
-                width: '200px' 
-              }}
+            <div
+              key={book.cover_id}
+              className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
             >
-              <h2>{book.title}</h2>
-              <p>{book.author ? book.author : "Unknown Author"}</p>
+              <h2 className="text-lg font-bold mb-2">{book.title}</h2>
+              <p className="text-gray-600 mb-2">
+                {book.author ? book.author : "Unknown Author"}
+              </p>
               {book.cover_url && (
-                <img 
-                  src={book.cover_url} 
-                  alt={`${book.title} cover`} 
-                  style={{ width: '100%', height: 'auto' }} 
+                <img
+                  src={book.cover_url}
+                  alt={`${book.title} cover`}
+                  className="w-full h-40 object-cover rounded-lg mb-4"
                 />
               )}
-              <p>Genre: {book.genre ? book.genre : "No genres available"}</p>
-              <button 
+              <p className="text-sm text-gray-500 mb-4">
+                Genre: {book.genre ? book.genre : "No genres available"}
+              </p>
+              <button
                 onClick={() => handleRemoveFromLibrary(book.cover_id)}
-                style={{
-                    padding: '8px 16px', backgroundColor: '#ff4d4d', color: '#fff', border: 'none',
-                    borderRadius: '4px', cursor: 'pointer', fontSize: '0.9em', marginTop: '10px'
-                  }}>
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-300"
+              >
                 Remove from Library
               </button>
             </div>
           ))}
         </div>
       ) : (
-        <p>Your library is empty. Add some books from the search page!</p>
+        <p className="text-center text-lg text-gray-600">
+          Your library is empty. Add some books from the search page!
+        </p>
       )}
     </section>
   );

@@ -21,7 +21,7 @@ const Navbar = () => {
       <div className="button-group">
         {/* Login button */}
         {!loginCheck ? (
-          <button className="btn bg-activeGreen hover:bg-green-600 text-white py-2 px-4 rounded-lg">
+          <button className="btn bg-[#FFC0CB] hover:bg-[#FF69B4] text-white py-2 px-4 rounded-lg">
             <Link to="/login" className="no-underline text-shadow-lg">
               Login
             </Link>
