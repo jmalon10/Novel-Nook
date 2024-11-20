@@ -44,11 +44,11 @@ const Login = () => {
       <main
         className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b"
         style={{
-          background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Gradient using hex codes
+        
         }}
       >
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-          <h4 className="text-2xl font-bold text-center mb-6">Login</h4>
+          <h4 className="text-2xl font-bold color to-black text-center mb-6">Login</h4>
           <div>
             {data ? (
               <p className="text-center">
@@ -91,10 +91,11 @@ const Login = () => {
                 User does not exist. Please try again or create a new user.
               </div>
             )}
+           
           </div>
         </div>
-       <div className="mt-6">
-  <button className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 shadow-[0_0_15px_4px_rgba(255,255,255,1)] animate-pulse-glow transition duration-300">
+        <div className="mt-6">
+  <button className="bg-[#da6aa2] text-white px-4 py-2 rounded-lg hover:bg-[#c6518c] shadow-[0_0_15px_4px_rgba(255,255,255,1)] animate-pulse-glow transition duration-300">
     <Link to="/createUser">Create New User</Link>
   </button>
 </div>

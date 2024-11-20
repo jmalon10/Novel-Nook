@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div
       style={{
-        background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Gradient using hex codes
+    
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
