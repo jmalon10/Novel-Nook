@@ -4,17 +4,17 @@ Novels that inspire, stories that aspire. Get lost in a book with Novel Nook!
 Welcome to Novel-Nook, your go-to platform for discovering, reading, and sharing novels from a wide variety of genres. Whether you're a fan of classic literature, contemporary tales, or emerging indie authors, Novel-Nook brings them all together in a beautifully designed, user-friendly web application.
 
 # 📚 Table of Contents
-* Description
-* Features
-* License
-* Technologies Used
-* Installation and Usage
-* Setup
-* Run the Application
-* Deployed Application
-* App Preview
-* Contact
-* Acknowledgements
+* [Description](#description)
+* [Features](#features)
+* [License](#license)
+* [Technologies Used](#technologies-used)
+* [Installation and Usage](#installation-and-usage)
+* [Setup](#setup)
+* [Run the Application](#run-the-application)
+* [Deployed Application](#deployed-application)
+* [App Preview](#app-preview)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
 
 # 📋 Description
 Novel-Nook is a digital library and book-sharing platform designed to help book lovers discover and enjoy their favorite novels. The platform offers an extensive catalog of books, categorized by genre, author, and popularity, allowing users to browse, read, and recommend novels to others. Novel-Nook also features social aspects like book reviews, ratings, and personalized reading lists.
