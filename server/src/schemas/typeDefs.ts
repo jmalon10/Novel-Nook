@@ -3,42 +3,54 @@ type User {
   _id: ID!
   username: String!
   email: String!
-  # Add additional fields here if needed, such as 'thoughts', 'friends', etc.
+  books: [Book]! # User's library, can be empty
 }
 
 type Book {
-  _id: ID!
+  _id: ID # Optional, as embedded documents might not have _id
   title: String!
   author: String!
-  genre: String!
+  genre: String
+  cover_id: Int
+  cover_url: String
 }
 
-# Type for the authentication payload, returning a token and user.
+# Input type for adding a book
+input AddBookInput {
+  title: String!
+  author: String!
+  genre: String
+  cover_id: Int
+  cover_url: String
+}
+
+# Type for the authentication payload
 type AuthPayload {
   token: String!
   user: User!
 }
 
-# Queries for retrieving user information
+
+# Queries for retrieving data
 type Query {
   users: [User!]!
   user(username: String!): User
-  me: User
-  getBooks(title: String, author: String, genre: String): [Book!]!
+  getUserBooks: [Book!]!
 }
 
-# Input type for the addUser mutation, containing necessary fields.
+# Input type for user registration
 input AddUserInput {
   username: String!
   email: String!
   password: String!
 }
 
-# Mutations for user registration and login
+# Mutations for user actions
 type Mutation {
   addUser(input: AddUserInput!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
-  addBook(title: String!, author: String!, genre: String!): Book!
+  addBook(input: AddBookInput!): User!
+  removeBook(cover_id: Int!): User!
 }
 `;
 

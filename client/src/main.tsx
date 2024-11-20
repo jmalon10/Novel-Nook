@@ -47,6 +47,7 @@ import Login from './pages/Login.tsx';
 import Home from './pages/Home.tsx';
 import CreateUser from './pages/CreateUser.tsx';
 import MyLibrary from './pages/MyLibrary.tsx';
+import { setContext } from '@apollo/client/link/context';
 
 // Error handling for Apollo Client
 const errorLink = onError(({ graphQLErrors, networkError }) => {
@@ -61,10 +62,23 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 // Apollo Client setup
+// Auth link for including JWT in headers
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+// Apollo Client setup
 const client = new ApolloClient({
   link: ApolloLink.from([
-    errorLink,
-    new HttpLink({ uri: '/graphql' }), // Update with your GraphQL server URL
+    authLink, // Ensure JWT token is included
+    errorLink, // Log errors
+    new HttpLink({ uri: '/graphql' }), // GraphQL endpoint
   ]),
   cache: new InMemoryCache(),
 });

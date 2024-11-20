@@ -23,4 +23,32 @@ export const ADD_USER = gql`
     }
   }
 `;
+export const ADD_BOOK = gql`
+  mutation addBook($input: AddBookInput!) {
+    addBook(input: $input) {
+      _id
+      books {
+        _id
+        title
+        author
+        genre
+        cover_id
+        cover_url
+      }
+    }
+  }
+`;
 
+export const REMOVE_BOOK = gql`
+mutation RemoveBook($cover_id: Int!) {
+  removeBook(cover_id: $cover_id) {
+    books {
+      cover_id
+      title
+      author_name
+      cover_url
+      genres
+    }
+  }
+}
+`;
