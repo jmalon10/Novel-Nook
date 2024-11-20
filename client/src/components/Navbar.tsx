@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import Auth from '../utils/auth';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import Auth from "../utils/auth";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [loginCheck, setLoginCheck] = useState(false);
@@ -16,36 +16,37 @@ const Navbar = () => {
   }, [loginCheck]);
 
   return (
-    <header className="display-flex justify-space-between align-center p-2 mint-green">
-      <h1>Welcome Novel-Nook!</h1>
-      <div className="button-group">
+    <header className="flex justify-between items-center p-4 bg-[#2C3E50] text-white shadow-md">
+      <h1 className="text-2xl font-bold">Welcome Novel-Nook!</h1>
+      <div className="flex gap-4">
         {/* Login button */}
         {!loginCheck ? (
-          <button className="btn bg-[#FFC0CB] hover:bg-[#FF69B4] text-white py-2 px-4 rounded-lg">
-            <Link to="/login" className="no-underline text-shadow-lg">
+          <button className="bg-pink-500 hover:bg-pink-700 text-white py-2 px-4 rounded-lg shadow-md">
+            <Link to="/login" className="no-underline">
               Login
             </Link>
           </button>
         ) : (
-          <div>
-          <button
-            className="btn bg-mediumGray hover:bg-lightGray text-white py-2 px-4 rounded-lg"
-            type="button"
-            onClick={() => {
-              Auth.logout();
-            }}
-          >
-            <span className="text-shadow-lg">Logout</span>
-          </button>
-            <button className="books-btn">
-        <Link to="/SearchBooks" className="no-underline text-shadow-lg">
-              SearchBooks
-            </Link>
-        </button>
-
-        <button className="library-btn">
-              <Link to="/library" className="no-underline text-shadow-lg">
-                MyLibrary
+          <div className="flex gap-4">
+            {/* Logout button */}
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-lg shadow-md"
+              type="button"
+              onClick={() => {
+                Auth.logout();
+              }}
+            >
+              Logout
+            </button>
+            {/* Navigation buttons */}
+            <button className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded-lg shadow-md">
+              <Link to="/SearchBooks" className="no-underline">
+                Search Books
+              </Link>
+            </button>
+            <button className="bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-lg shadow-md">
+              <Link to="/library" className="no-underline">
+                My Library
               </Link>
             </button>
           </div>
@@ -56,6 +57,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 
