@@ -16,39 +16,41 @@ const Navbar = () => {
   }, [loginCheck]);
 
   return (
-    <header className="display-flex justify-space-between align-center p-2 mint-green">
-      <h1>Welcome Novel-Nook!</h1>
-      <div className="button-group">
+    <header className="flex flex-col items-center p-4 bg-gradient-to-b from-mint-green to-gray-200">
+      <h1 className="text-5xl font-bold mb-4">Welcome to Novel-Nook!</h1>
+      
+      <div className="flex flex-wrap justify-center items-center gap-6">
         {/* Login button */}
         {!loginCheck ? (
-          <button className="btn bg-[#FFC0CB] hover:bg-[#FF69B4] text-white py-2 px-4 rounded-lg">
-            <Link to="/login" className="no-underline text-shadow-lg">
+          <button className="bg-[#da6aa2] hover:bg-[#c6518c] text-white py-2 px-4 rounded-lg shadow-md transition duration-300">
+            <Link to="/login" className="no-underline">
               Login
             </Link>
           </button>
         ) : (
-          <div>
-          <button
-            className="btn bg-mediumGray hover:bg-lightGray text-white py-2 px-4 rounded-lg"
-            type="button"
-            onClick={() => {
-              Auth.logout();
-            }}
-          >
-            <span className="text-shadow-lg">Logout</span>
-          </button>
-            <button className="books-btn">
-        <Link to="/SearchBooks" className="no-underline text-shadow-lg">
-              SearchBooks
-            </Link>
-        </button>
+          <>
+            <button
+              className="bg-[#da6aa2] hover:bg-[#c6518c] text-white py-3 px-4 rounded-lg shadow-md transition duration-300"
+              type="button"
+              onClick={() => {
+                Auth.logout();
+              }}
+            >
+              Logout
+            </button>
 
-        <button className="library-btn">
-              <Link to="/library" className="no-underline text-shadow-lg">
-                MyLibrary
+            <button className="bg-[#da6aa2] hover:bg-[#c6518c] text-white py-3 px-4 rounded-lg shadow-md transition duration-300">
+              <Link to="/SearchBooks" className="no-underline">
+                Search Books
               </Link>
             </button>
-          </div>
+
+            <button className="bg-[#da6aa2] hover:bg-[#c6518c] text-white py-3 px-4 rounded-lg shadow-md transition duration-300">
+              <Link to="/library" className="no-underline">
+                My Library
+              </Link>
+            </button>
+          </>
         )}
       </div>
     </header>
@@ -56,6 +58,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 

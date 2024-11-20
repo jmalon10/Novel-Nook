@@ -96,8 +96,10 @@ const SearchBooks = () => {
   };
   // Render the form and search results
   return (
+    
     <section className="py-10 px-4">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books</h1>
+
+      <h4 className="text-4xl font-bold text-center mb-6">Search Books</h4>
       <form
         onSubmit={handleFormSubmit}
         className="flex flex-col items-center gap-4 mb-8 max-w-md mx-auto"
@@ -164,7 +166,7 @@ const SearchBooks = () => {
         !loading &&
         !error && (
           <div className="flex items-center justify-center h-60">
-            <p className="text-center text-lg font-medium text-gray-600">
+            <p className="text-center text-lg font-medium text-white">
               No books found ☹️ Try searching for something else.
             </p>
           </div>

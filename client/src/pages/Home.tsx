@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <div
       style={{
-        background: 'linear-gradient(to bottom, #856F8C, #44345D)', // Gradient using hex codes
+    
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -37,19 +37,26 @@ const Home = () => {
       {loginCheck ? (
         <>
           {!selectedGenre ? (
-            <div className="text-center space-y-8">
-              <h1 className="text-4xl font-bold">Welcome to the Best Sellers Portal!</h1>
-              <button
-                onClick={handleLogout}
-                className="px-6 py-3 bg-red-700 text-white rounded-lg shadow hover:bg-red-700 transition duration-300"
-              >
-                Logout
-              </button>
-              <h2 className="text-2xl font-semibold">Check out the current best sellers!</h2>
-              <div
-  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
->
-  {[
+                        <div className="space-y-8">
+                        {/* Main Title */}
+                        <div className="w-full flex justify-center items-start">
+                          <h4 className="text-4xl font-bold mt-4">Welcome to the Best Sellers Portal!</h4>
+                        </div>
+          
+                        {/* Logout Button */}
+                        <button
+                          onClick={handleLogout}
+                          className="px-6 py-3 bg-red-700 text-white rounded-lg shadow hover:bg-red-800 transition duration-300"
+                        >
+                          Logout
+                        </button>
+          
+                        {/* Subtitle */}
+                        <h4 className="text-2xl font-semibold">Check out the current best sellers!</h4>
+          
+                        {/* Genre Cards */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                          {[
     { title: "Young Adult", genre: "Young-Adult", image: "https://m.media-amazon.com/images/I/41RDgCHpGTL._SY445_SX342_.jpg" },
     { title: "Crime", genre: "Crime-and-Punishment", image: "https://m.media-amazon.com/images/I/41x6HtLdEhL._SY445_SX342_QL70_FMwebp_.jpg" },
     { title: "Relationships", genre: "Relationships", image: "https://m.media-amazon.com/images/I/81xXA1fRHbL._SX522_.jpg" },
@@ -84,9 +91,9 @@ const Home = () => {
           )}
         </>
       ) : (
-        <div className="text-center">
-          <h1 className="text-4xl font-bold">Please log in to explore the Best Sellers Portal!</h1>
-        </div>
+        <div className="flex justify-center items-start min-h-screen">
+        <h4 className="text-4xl font-bold mt-4">Please log in to explore the Best Sellers Portal!</h4>
+      </div>
       )}
     </div>
   );

@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"); /* Import Fredoka One */
+
+/* Global styles: Gradient background and default font */
+body {
+  background: linear-gradient(
+    to bottom,
+    #44345d,
+    #856f8c
+  ); /* Gradient background */
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica", sans-serif; /* Main font: Helvetica */
+}
+
+/* Title (h1) styles: Fancy font, pink color */
+
+h1 {
+  font-family: "Fredoka One", sans-serif; /* Playful font for the title */
+  font-size: 4rem; /* Large title size */
+  text-align: center; /* Centers the title */
+  color: #ffffff; /* Pink color */
+  text-shadow: 4px 4px 8px rgba(242, 120, 197, 0.4); /* Shadow for contrast */
+  letter-spacing: 2px; /* Elegant spacing */
+  margin: 40px 0; /* Spacing around the title */
+  padding: 0;
+  line-height: 1.2; /* Spaced nicely */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Adjusts for content */
+}
+
+/* Subtitle (h2, h3, etc.) styles */
+h2 {
+  font-family: "Playfair Display", serif; /* Fancy font for the title */
+
+  font-size: 4rem; /* Large title size */
+  text-align: center; /* Centers the title */
+  color: #050000; /* White Color */
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Shadow for contrast */
+  letter-spacing: 2px; /* Elegant spacing */
+  margin: 40px 0; /* Spacing around the title */
+  padding: 0;
+  line-height: 1.2; /* Spaced nicely */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Adjusts for content */
+}
+h3 {
+  text-align: center; /* Centers all other headers */
+  margin: 20px 0; /* Consistent spacing */
+}
+h4 {
+  font-family: "Playfair Display", serif; /* Fancy font for the title */
+
+  font-size: 4rem; /* Large title size */
+  text-align: center; /* Centers the title */
+  color: #ffffff; /* White Color */
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Shadow for contrast */
+  letter-spacing: 2px; /* Elegant spacing */
+  margin: 40px 0; /* Spacing around the title */
+  padding: 0;
+  line-height: 1.2; /* Spaced nicely */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto; /* Adjusts for content */
+}
+
+/* Container for buttons: Ensures proper spacing */
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Centers buttons horizontally */
+  align-items: center; /* Centers buttons vertically */
+  gap: 20px; /* Adds space between buttons */
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  margin: 20px 0; /* Adds spacing around the button section */
+}
+
+/* Button styles: Pink background with hover and active effects */
+.novel-nook-btn {
+  background-color: #f07ad4; /* Pink button background */
+  color: white; /* White text for contrast */
+  padding: 12px 30px; /* Comfortable padding */
+  font-size: 1.2rem; /* Refined font size */
+  border: none; /* Removes default border */
+  border-radius: 12px; /* Rounded corners for elegance */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.3s ease; /* Smooth transitions */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Hover effect for the button */
+.novel-nook-btn:hover {
+  background-color: #d05fb2; /* Darker pink on hover */
+  transform: translateY(-4px); /* Slight "pop" effect */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+}
+
+/* Focus effect: Subtle pink glow */
+.novel-nook-btn:focus {
+  outline: none; /* Removes default outline */
+  box-shadow: 0 0 0 3px rgba(240, 122, 212, 0.5); /* Pink glow for focus state */
+}
+
+/* Active effect: Pressed button style */
+.novel-nook-btn:active {
+  background-color: #a44e93; /* Darkest pink when clicked */
+  transform: translateY(0); /* Removes "pop" effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
+}
