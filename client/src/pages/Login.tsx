@@ -48,7 +48,7 @@ const Login = () => {
         }}
       >
         <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
-          <h4 className="text-2xl font-bold color to-black text-center mb-6">Login</h4>
+          <h2 className="text-2xl font-bold color to-black text-center mb-6">Login</h2>
           <div>
             {data ? (
               <p className="text-center">
