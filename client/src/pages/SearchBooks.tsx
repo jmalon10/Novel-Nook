@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Book from '../components/BookCard';
-import BookCard from '../components/BookCard';
 import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from '../utils/mutations';
 import { GET_USER_BOOKS } from '../utils/queries';
