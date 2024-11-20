@@ -1,42 +1,49 @@
 import React from 'react';
 
-interface Book {
-  cover_id?: number;
+interface BookCardProps {
+  cover_id: number;
   title: string;
-  author_name: string[];
+  author: string;
   cover_url?: string;
-  genres?: string[];
+  genre?: string;
+  onAction: () => void;
+  actionLabel: string;
 }
-interface BookCardProps {
-  book: Book;
-  onAddToLibrary: (book: Book) => void;
-}
-interface BookCardProps {
-  book: Book;
-}
-const BookCard: React.FC<BookCardProps> = ({ book, onAddToLibrary }) => {
-    return (
-      <div className="book-card" style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '16px', margin: '8px', maxWidth: '200px' }}>
-        {book.cover_url ? (
-          <img src={book.cover_url} alt={`${book.title} cover`} style={{ width: '100%', borderRadius: '4px' }} />
-        ) : (
-          <div style={{ width: '100%', padding: '40px 0', textAlign: 'center', backgroundColor: '#f4f4f4', borderRadius: '4px' }}>No Cover</div>
-        )}
-        <h3 style={{ fontSize: '1.2em', marginTop: '8px' }}>{book.title}</h3>
-        <p style={{ fontSize: '0.9em', color: '#555' }}>
-          Author(s): {book.author_name ? book.author_name.join(', ') : 'Unknown'}
-        </p>
-        {book.genres && (
-          <p style={{ fontSize: '0.8em', color: '#777' }}>Genres: {book.genres.join(', ')}</p>
-        )}
-        <button
-        onClick={() => onAddToLibrary(book)}
-        style={{ marginTop: '12px', padding: '8px 12px', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+
+const BookCard: React.FC<BookCardProps> = ({
+  title,
+  author,
+  cover_url,
+  genre,
+  onAction,
+  actionLabel,
+}) => {
+  return (
+    <div className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center">
+      {cover_url ? (
+        <img
+          src={cover_url}
+          alt={`${title} cover`}
+          className="w-full h-40 object-cover rounded-t-lg mb-4"
+        />
+      ) : (
+        <div className="w-full h-40 bg-gray-200 rounded-t-lg mb-4 flex items-center justify-center">
+          <p className="text-gray-500">No Cover Available</p>
+        </div>
+      )}
+      <h3 className="text-lg font-bold mb-2">{title}</h3>
+      <p className="text-gray-600 mb-2">{author || 'Unknown Author'}</p>
+      <p className="text-sm text-gray-500 mb-4">
+        Genre: {genre || 'Not Specified'}
+      </p>
+      <button
+        onClick={onAction}
+        className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-300"
       >
-        Add to Library
-      </button>  
-      </div>
-    );
-  };
-  
-  export default BookCard;
+        {actionLabel}
+      </button>
+    </div>
+  );
+};
+
+export default BookCard;

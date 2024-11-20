@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import Book from '../components/BookCard';
+import BookCard from '../components/BookCard';
 import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from '../utils/mutations';
 import { GET_USER_BOOKS } from '../utils/queries';
-
-
-
-// Define the structure of each book object
 
 interface Book {
   cover_id: number;
@@ -20,18 +16,19 @@ export interface UserBooksQuery {
   getUserBooks: Book[];
 }
 
-const SearchBooks = () => {
-  const [searchInput, setSearchInput] = useState(''); // State for search input
-  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]); // State for search results, typed with the Book interface
-  const [loading, setLoading] = useState(false); // State for loading indicator
+const SearchBooks: React.FC = () => {
+  const [searchInput, setSearchInput] = useState('');
+  const [searchedBooks, setSearchedBooks] = useState<Book[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [addBook] = useMutation(ADD_BOOK);
-  const handleAddToLibrary = async (book: any) => {
-      try {
-        const coverUrl = book.cover_id 
-        ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg` 
+
+  const handleAddToLibrary = async (book: Book) => {
+    try {
+      const coverUrl = book.cover_id
+        ? `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`
         : null;
-  
+
       await addBook({
         variables: {
           input: {
@@ -43,7 +40,9 @@ const SearchBooks = () => {
           },
         },
         update: (cache, { data: { addBook } }) => {
-          const existingBooks = cache.readQuery<UserBooksQuery>({ query: GET_USER_BOOKS });
+          const existingBooks = cache.readQuery<UserBooksQuery>({
+            query: GET_USER_BOOKS,
+          });
           cache.writeQuery({
             query: GET_USER_BOOKS,
             data: {
@@ -58,32 +57,34 @@ const SearchBooks = () => {
       alert('Failed to add book to library.');
     }
   };
-  // Function to handle form submission and fetch books from Open Library API
+
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!searchInput.trim()) {
       return;
     }
-    setLoading(true);  // Start loading
+    setLoading(true);
     setError(null);
 
     try {
       const response = await fetch(
-        `https://openlibrary.org/search.json?title=${encodeURIComponent(searchInput.trim())}&limit=10`
+        `https://openlibrary.org/search.json?title=${encodeURIComponent(
+          searchInput.trim()
+        )}&limit=10`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch books from Open Library.');
       }
-      const data = await response.json(); // Map through the results and format them as needed
+      const data = await response.json();
       const books = data.docs.map((book: any) => ({
         title: book.title,
         author_name: book.author_name || ['Unknown Author'],
         cover_id: book.cover_i,
-        cover_url: book.cover_i 
+        cover_url: book.cover_i
           ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
-          : book.isbn 
-            ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` 
-            : null,
+          : book.isbn
+          ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg`
+          : null,
         genres: book.subject ? book.subject.slice(0, 5) : [],
       }));
       setSearchedBooks(books);
@@ -91,10 +92,10 @@ const SearchBooks = () => {
       console.error('Error fetching books:', error);
       setError('An error occurred while fetching books. Please try again.');
     } finally {
-      setLoading(false);  // Stop loading
+      setLoading(false);
     }
   };
-  // Render the form and search results
+
   return (
     <section className="py-10 px-4">
       <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Search Books</h1>
@@ -116,48 +117,21 @@ const SearchBooks = () => {
           Search
         </button>
       </form>
-  {/* Show loading message */}
-      {loading && (
-        <p className="text-center text-lg font-medium text-gray-600">Loading...</p>
-      )}
-
-      {error && (
-        <p className="text-center text-lg font-medium text-red-600">{error}</p>
-         /* Show error message */
-      )}
-  {/* Display the search results using BookCard */}
+      {loading && <p className="text-center text-lg font-medium text-gray-600">Loading...</p>}
+      {error && <p className="text-center text-lg font-medium text-red-600">{error}</p>}
       {searchedBooks.length > 0 && !loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {searchedBooks.map((book) => (
-            <div
+            <BookCard
               key={book.cover_id}
-              className="bg-white text-black rounded-lg shadow-lg p-4 transform hover:scale-105 transition duration-300 text-center"
-            >
-              {book.cover_url ? (
-                <img
-                  src={book.cover_url}
-                  alt={`${book.title} cover`}
-                  className="w-full h-40 object-cover rounded-t-lg mb-4"
-                />
-              ) : (
-                <div className="w-full h-40 bg-gray-200 rounded-t-lg mb-4 flex items-center justify-center">
-                  <p className="text-gray-500">No Cover Available</p>
-                </div>
-              )}
-              <h3 className="text-lg font-bold mb-2">{book.title}</h3>
-              <p className="text-gray-600 mb-2">
-                {book.author_name ? book.author_name.join(', ') : 'Unknown Author'}
-              </p>
-              <p className="text-sm text-gray-500 mb-4">
-                Genres: {book.genres?.join(', ') || 'Not Specified'}
-              </p>
-              <button
-                onClick={() => handleAddToLibrary(book)}
-                className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300"
-              >
-                Add to Library
-              </button>
-            </div>
+              cover_id={book.cover_id}
+              title={book.title}
+              author={book.author_name.join(', ')}
+              cover_url={book.cover_url}
+              genre={book.genres?.[0]}
+              onAction={() => handleAddToLibrary(book)}
+              actionLabel="Add to Library"
+            />
           ))}
         </div>
       ) : (
