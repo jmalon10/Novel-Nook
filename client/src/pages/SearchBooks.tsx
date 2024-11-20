@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_BOOK } from '../utils/mutations';
 
 
+
 // Define the structure of each book object
 interface Book {
   cover_id: number;
@@ -20,6 +21,7 @@ const SearchBooks = () => {
   const [error, setError] = useState<string | null>(null);
   const [addBook] = useMutation(ADD_BOOK);
   const handleAddToLibrary = async (book: any) => {
+    console.log('Adding book to library:---------------------------------------------------', book);
     try {
       await addBook({
         variables: {
@@ -27,11 +29,12 @@ const SearchBooks = () => {
             title: book.title,
             author: book.author_name.join(', '),
             genre: book.genres ? book.genres[0] : 'Unknown',
-            cover_id: book.cover_i,
-            cover_url: book.isbn ? `https://covers.openlibrary.org/b/isbn/${book.isbn[0]}-M.jpg` : null,
+            cover_id: book.cover_id,
+            cover_url: `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`,
           },
         },
       });
+      console.log('Adding book to library 2 :---------------------------------------------------', book);
       alert(`${book.title} has been added to your library!`);
     } catch (error) {
       console.error('Error adding book to library:', error);
@@ -90,9 +93,9 @@ const SearchBooks = () => {
        {/* Display the search results using BookCard */}
        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
         {searchedBooks.length > 0 && !loading ? (
-          searchedBooks.map((book) => (
+          searchedBooks.map((book, index) => (
             <BookCard 
-              key={book.cover_id} 
+              key={book.cover_id || `${book.title}-${index}`}   
               book={book} 
               onAddToLibrary={handleAddToLibrary}
             />

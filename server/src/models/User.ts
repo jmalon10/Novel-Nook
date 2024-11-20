@@ -6,6 +6,8 @@ interface IBook {
   title: string;
   author: string;
   genre?: string;
+  cover_id?: number;
+  cover_url?: string;
 }
 
 // Define an interface for the User document
@@ -33,6 +35,12 @@ const bookSchema = new Schema<IBook>(
     genre: {
       type: String,
       trim: true,
+    },
+    cover_id: {
+      type: Number,
+    },
+    cover_url: {
+      type: String,
     },
   },
   {

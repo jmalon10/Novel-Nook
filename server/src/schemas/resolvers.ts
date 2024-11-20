@@ -9,6 +9,15 @@ interface AddUserArgs {
     password: string;
   }
 }
+interface AddUserBookArgs {
+  input:{
+      title: string;
+      author: string;
+      genre: string;
+      cover_id: number;
+      cover_url: string;
+  }
+}
 
 interface LoginUserArgs {
   email: string;
@@ -85,7 +94,7 @@ const resolvers = {
       };
     },
     
-    addBook: async (_parent: any, { input }: { input: { title: string; author: string; genre: string } }, context: any) => {
+    addBook: async (_parent: any, { input }:  AddUserBookArgs , context: any) => {
       if (!context.user) {
         throw new AuthenticationError('You must be logged in to perform this action.');
       }
